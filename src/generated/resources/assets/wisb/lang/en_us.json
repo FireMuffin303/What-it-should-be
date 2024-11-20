@@ -1,0 +1,7 @@
+{
+  "wisb.axolotl_bucket.tooltip.variant": "Variant : %s",
+  "wisb.beehive.tooltip.honey_level": "%s / %s",
+  "wisb.clock.playtime": "Play time : %s",
+  "wisb.clock.worldtime": "Time : %s | Day : %s",
+  "wisb.compass.coordinates": "X : %.2d | Y : %.2d | Z : %.2d"
+}

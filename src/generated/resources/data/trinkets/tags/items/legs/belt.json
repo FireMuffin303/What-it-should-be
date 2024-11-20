@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:compass",
+    "minecraft:clock",
+    "minecraft:recovery_compass"
+  ]
+}
