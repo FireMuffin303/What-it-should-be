@@ -21,6 +21,8 @@ loom {
             runDir "build/datagen"
         }
     }
+
+    accessWidenerPath = file("src/main/resources/wisb.accesswidener")
 }
 
 repositories {

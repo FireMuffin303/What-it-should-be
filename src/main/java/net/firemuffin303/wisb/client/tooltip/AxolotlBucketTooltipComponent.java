@@ -25,6 +25,7 @@ public class AxolotlBucketTooltipComponent implements TooltipComponent {
     final Identifier ICON = new Identifier("minecraft","textures/gui/icons.png");
 
     final Text variantText;
+    final Text healthText;
 
 
     public AxolotlBucketTooltipComponent(AxolotlBucketTooltipData axolotlBucketTooltipData){
@@ -43,7 +44,8 @@ public class AxolotlBucketTooltipComponent implements TooltipComponent {
         this.health = axolotlBucketTooltipData.health;
         this.variant = AxolotlEntity.Variant.byId(axolotlBucketTooltipData.variant);
 
-        this.variantText = Text.translatable("wisb.axolotl_bucket.tooltip.variant",this.variant.getName());
+        this.healthText = Text.of((int)this.health +"/"+(int)this.axolotlEntity.getMaxHealth());
+        this.variantText = Text.of(this.variant.getName().substring(0,1).toUpperCase() + this.variant.getName().substring(1));
 
     }
 
@@ -56,7 +58,7 @@ public class AxolotlBucketTooltipComponent implements TooltipComponent {
 
     @Override
     public int getWidth(TextRenderer textRenderer) {
-        return textRenderer.getWidth(this.variantText) + 34;
+        return Math.max(textRenderer.getWidth(this.variantText) + 32, textRenderer.getWidth(this.healthText) +44) +2 ;
     }
 
     @Override
@@ -65,7 +67,7 @@ public class AxolotlBucketTooltipComponent implements TooltipComponent {
         RenderSystem.disableDepthTest();
         context.drawTexture(ICON,x+32,y,52,9,9,9);
         context.drawTexture(ICON,x+32,y,88,9,9,9);
-        context.drawText(textRenderer,Text.of("x"+ health / 2),x+44,y, 11184810,false);
+        context.drawText(textRenderer,this.healthText,x+44,y, 11184810,false);
         context.drawText(textRenderer, this.variantText,x+32,y+12,11184810,false);
     }
 

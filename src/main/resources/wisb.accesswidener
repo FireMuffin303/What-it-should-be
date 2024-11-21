@@ -1,0 +1,3 @@
+accessWidener v2 named
+
+accessible method net/minecraft/entity/passive/TropicalFishEntity getVariantId (Lnet/minecraft/entity/passive/TropicalFishEntity$Variety;Lnet/minecraft/util/DyeColor;Lnet/minecraft/util/DyeColor;)I

@@ -2,6 +2,7 @@ package net.firemuffin303.wisb.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
+import net.minecraft.entity.passive.AxolotlEntity;
 
 public class ModLangProvider extends FabricLanguageProvider {
     protected ModLangProvider(FabricDataOutput dataOutput) {
