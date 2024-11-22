@@ -3,6 +3,7 @@ package net.firemuffin303.wisb.datagen;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.advancement.criterion.ItemCriterion;
+import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.RecipeProvider;
@@ -30,5 +31,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         CookingRecipeJsonBuilder.createCampfireCooking(Ingredient.ofItems(Items.ROTTEN_FLESH), RecipeCategory.MISC,Items.LEATHER,0.35f,600)
                 .criterion(hasItem(Items.ROTTEN_FLESH), conditionsFromItem(Items.ROTTEN_FLESH)).offerTo(consumer,getItemPath(Items.LEATHER) + "_from_campfire");
+
+        /*
+        ShapedRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, Blocks.LODESTONE).input('S',Items.CHISELED_STONE_BRICKS).input('#',Items.COMPASS).input('C',Items.COPPER_INGOT)
+                .pattern("SCS")
+                .pattern("C#C")
+                .pattern("SCS")
+                .criterion(hasItem(Items.COMPASS),conditionsFromItem(Items.COMPASS)).offerTo(consumer);
+        */
     }
+
 }
