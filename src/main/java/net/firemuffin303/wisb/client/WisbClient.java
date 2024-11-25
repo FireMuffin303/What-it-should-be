@@ -15,6 +15,8 @@ public class WisbClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        ModConfig.load();
+
         HudRenderCallback.EVENT.register(ModHudRender::init);
         TooltipComponentCallback.EVENT.register(WisbClient::tooltipComponentEvent);
     }
@@ -22,11 +24,11 @@ public class WisbClient implements ClientModInitializer {
     private static TooltipComponent tooltipComponentEvent(TooltipData tooltipData){
         if(tooltipData instanceof BeeNestTooltipComponent.BeeNestTooltipData beeNestTooltipData){
             return new BeeNestTooltipComponent(beeNestTooltipData);
-        } else if (tooltipData instanceof CrossbowTooltipComponent.CrossbowTooltipData crossbowData && !ModConfig.disableWisbCrossbowTooltip) {
+        } else if (tooltipData instanceof CrossbowTooltipComponent.CrossbowTooltipData crossbowData) {
             return new CrossbowTooltipComponent(crossbowData);
-        } else if(tooltipData instanceof AxolotlBucketTooltipComponent.AxolotlBucketTooltipData axolotlBucketTooltipData && !ModConfig.disableWisbMobBucketTooltip){
+        } else if(tooltipData instanceof AxolotlBucketTooltipComponent.AxolotlBucketTooltipData axolotlBucketTooltipData){
             return new AxolotlBucketTooltipComponent(axolotlBucketTooltipData);
-        }else if (tooltipData instanceof TropicalfishTooltipComponent.TropicalfishTooltipData tropicalFishBucketTooltipData && !ModConfig.disableWisbMobBucketTooltip) {
+        }else if (tooltipData instanceof TropicalfishTooltipComponent.TropicalfishTooltipData tropicalFishBucketTooltipData) {
             return new TropicalfishTooltipComponent(tropicalFishBucketTooltipData);
         }
         return null;

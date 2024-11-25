@@ -3,5 +3,18 @@
   "wisb.beehive.tooltip.honey_level": "%s / %s",
   "wisb.clock.playtime": "Play time : %s",
   "wisb.clock.worldtime": "Time : %s:%s | Day : %s",
-  "wisb.compass.coordinates": "X : %.2d | Y : %.2d | Z : %.2d"
+  "wisb.clock.worldtime.twelve_format": "Time : %s:%s %s | Day : %s",
+  "wisb.compass.coordinates": "X : %s | Y : %s | Z : %s",
+  "wisb.options.preciseCoordinate": "Compass Precise Coordinate",
+  "wisb.options.preciseCoordinate.desc": "Show decimal number of current coordinate",
+  "wisb.options.showBeehiveTooltip": "Show Beehive Tooltip",
+  "wisb.options.showBeehiveTooltip.desc": "Show how many bees and honey's progresses.",
+  "wisb.options.showCrossbowTooltip": "Show Crossbow Tooltip",
+  "wisb.options.showCrossbowTooltip.desc": "Show crossbow's ammo details.",
+  "wisb.options.showMobBucketTooltip": "Show Mob Bucket Tooltip",
+  "wisb.options.showMobBucketTooltip.desc": "Show mob's health & variant.",
+  "wisb.options.time.full_format": "24 Hour",
+  "wisb.options.time.twelve_format": "12 Hour",
+  "wisb.options.timeformat": "Clock Time Format",
+  "wisb.options.timeformat.desc": "Choose between 24-Hour or 12-Hour (AM/PM) format"
 }

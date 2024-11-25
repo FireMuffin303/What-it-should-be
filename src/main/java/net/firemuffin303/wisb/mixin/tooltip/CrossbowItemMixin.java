@@ -39,7 +39,7 @@ public abstract class CrossbowItemMixin extends RangedWeaponItem {
 
     @Inject(method = "appendTooltip",at = @At("HEAD"), cancellable = true)
     public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci){
-        if(!ModConfig.disableWisbCrossbowTooltip){
+        if(ModConfig.getShowCrossbowBucket()){
             ci.cancel();
         }
     }
@@ -47,12 +47,13 @@ public abstract class CrossbowItemMixin extends RangedWeaponItem {
     @Unique
     @Override
     public Optional<TooltipData> getTooltipData(ItemStack stack) {
-        List<ItemStack> list = getProjectiles(stack);
-        if(isCharged(stack) && !list.isEmpty()){
-            ItemStack itemStack = list.get(0);
-            return Optional.of(new CrossbowTooltipComponent.CrossbowTooltipData(itemStack));
+        if(ModConfig.getShowCrossbowBucket()){
+            List<ItemStack> list = getProjectiles(stack);
+            if(isCharged(stack) && !list.isEmpty()){
+                ItemStack itemStack = list.get(0);
+                return Optional.of(new CrossbowTooltipComponent.CrossbowTooltipData(itemStack));
+            }
         }
-
         return super.getTooltipData(stack);
     }
 }

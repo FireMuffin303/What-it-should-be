@@ -1,6 +1,7 @@
 package net.firemuffin303.wisb.mixin.tooltip;
 
 import net.firemuffin303.wisb.client.tooltip.BeeNestTooltipComponent;
+import net.firemuffin303.wisb.config.ModConfig;
 import net.minecraft.block.BeehiveBlock;
 import net.minecraft.client.item.TooltipData;
 import net.minecraft.item.BlockItem;
@@ -27,7 +28,7 @@ public abstract class BlockItemMixin extends Item {
 
     @Override
     public Optional<TooltipData> getTooltipData(ItemStack stack) {
-        if(stack.getItem() instanceof BlockItem item && item.getBlock() instanceof BeehiveBlock){
+        if(stack.getItem() instanceof BlockItem item && item.getBlock() instanceof BeehiveBlock && ModConfig.getShowBeehiveTooltip()){
             int honeyLevel = 0;
             int bees = 0;
             if(stack.hasNbt()){

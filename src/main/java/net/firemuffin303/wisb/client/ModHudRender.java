@@ -3,6 +3,7 @@ package net.firemuffin303.wisb.client;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.firemuffin303.wisb.Wisb;
+import net.firemuffin303.wisb.config.ModConfig;
 import net.firemuffin303.wisb.mixin.BossBarHudAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
@@ -97,8 +98,14 @@ public class ModHudRender {
         }
         drawContext.disableScissor();
 
+        boolean isPrecise = ModConfig.preciseCoordinate.getValue();
+        Vec3d vec3d = clientPlayerEntity.getPos();
+
         //Coords
-        Text coord = Text.translatable("wisb.compass.coordinates",String.format("%.2f",clientPlayerEntity.getX()) ,String.format("%.2f",clientPlayerEntity.getY()),String.format("%.2f",clientPlayerEntity.getZ()));
+        Text coord = Text.translatable("wisb.compass.coordinates",
+                String.format(isPrecise ? "%.2f": "%.0f",isPrecise ? vec3d.getX() : Math.floor(vec3d.getX())),
+                String.format(isPrecise ? "%.2f": "%.0f",isPrecise ? vec3d.getY() : Math.floor(vec3d.getY())),
+                String.format(isPrecise ? "%.2f": "%.0f",isPrecise ? vec3d.getZ() : Math.floor(vec3d.getZ())));
         int blockBorder = (textRenderer.getWidth(coord)/2) + 5;
         drawContext.fill(x-blockBorder,coordY,x+blockBorder,coordY+12,0x50000000);
         drawContext.drawCenteredTextWithShadow(textRenderer,coord,x,coordY+2,0xFFFFFF);
@@ -109,18 +116,17 @@ public class ModHudRender {
         TextRenderer textRenderer = minecraftClient.textRenderer;
         int x = drawContext.getScaledWindowWidth() /2;
         ClientWorld world = minecraftClient.world;
-        drawContext.fill(x-60,1,x+60,24,0x50000000);
-
         double minuteTime = MathHelper.floorMod(world.getTimeOfDay() / 1000f,1f) * 60;
         double hourTime = MathHelper.floorMod( (world.getTimeOfDay()/24000f)-0.75f, 1f) * 24 ;
-
-        Text AMPM = Text.translatable("wisb.clock.worldtime", String.format("%02d",hourTime < 12 ? (int)hourTime == 0 ? 12: (int)hourTime : (int)hourTime-12 == 0 ? 12: (int)hourTime-12),String.format("%02d",(int)minuteTime),world.getTimeOfDay() / 24000L);
+        Text AMPM = Text.translatable("wisb.clock.worldtime.twelve_format", String.format("%02d",hourTime < 12 ? (int)hourTime == 0 ? 12: (int)hourTime : (int)hourTime-12 == 0 ? 12: (int)hourTime-12),String.format("%02d",(int)minuteTime),hourTime > 12 ? "PM":"AM",world.getTimeOfDay() / 24000L);
         Text fullFormat = Text.translatable("wisb.clock.worldtime", String.format("%02d",(int)hourTime),String.format("%02d",(int)minuteTime),world.getTimeOfDay() / 24000L);
 
-        drawContext.drawCenteredTextWithShadow(textRenderer,fullFormat ,x,3,0xFFFFFF);
-        drawContext.drawCenteredTextWithShadow(textRenderer, Text.translatable("wisb.clock.playtime",
-                minecraftClient.player.getStatHandler().getStat(Stats.CUSTOM.getOrCreateStat(Stats.PLAY_TIME))
-        ),x,13,0xFFFFFF);
+        Text currentText = ModConfig.timeFormat.getValue() == ModConfig.TimeFormat.FULL_FORMAT ? fullFormat : AMPM;
+
+        int xPadding = (textRenderer.getWidth(currentText) /2) +5;
+        drawContext.fill(x-xPadding,1,x+xPadding,12,0x50000000);
+
+        drawContext.drawCenteredTextWithShadow(textRenderer, currentText ,x,3,0xFFFFFF);
     }
 
     public static void recoveryCompassHUD(DrawContext drawContext,float delta,MinecraftClient minecraftClient){

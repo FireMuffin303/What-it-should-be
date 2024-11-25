@@ -18,6 +18,9 @@
     ],
     "fabric-datagen": [
       "net.firemuffin303.wisb.datagen.ModDataGen"
+    ],
+    "modmenu": [
+      "net.firemuffin303.wisb.integration.ModMenuConfig"
     ]
   },
   "mixins": [

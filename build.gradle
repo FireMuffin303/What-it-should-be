@@ -69,6 +69,8 @@ dependencies {
 
     modRuntimeOnly("mezz.jei:jei-${minecraft_version}-fabric:${project.jei_version}")
 
+    modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+
 }
 
 processResources {

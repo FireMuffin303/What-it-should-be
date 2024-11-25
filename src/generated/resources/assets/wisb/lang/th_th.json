@@ -1,0 +1,20 @@
+{
+  "wisb.axolotl_bucket.tooltip.variant": "ลาย : %s",
+  "wisb.beehive.tooltip.honey_level": "%s / %s",
+  "wisb.clock.playtime": "เวลาเล่น : %s",
+  "wisb.clock.worldtime": "เวลา : %s:%s | วัน : %s",
+  "wisb.clock.worldtime.twelve_format": "เวลา : %s:%s %s | วัน : %s",
+  "wisb.compass.coordinates": "X : %s | Y : %s | Z : %s",
+  "wisb.options.preciseCoordinate": "เข็มทิศแสดงตำแหน่งอย่างแม่นยำ",
+  "wisb.options.preciseCoordinate.desc": "แสดงเลขทศนิยมของพิกัดในตำแหน่งปัจจุบัน",
+  "wisb.options.showBeehiveTooltip": "แสดงรายละเอียดรังผึ้ง",
+  "wisb.options.showBeehiveTooltip.desc": "แสดงว่ามีผึ้งในรังกี่ตัวและระดับน้ำผึ่งภายในรัง",
+  "wisb.options.showCrossbowTooltip": "แสดงรายละเอียดหน้าไม้",
+  "wisb.options.showCrossbowTooltip.desc": "แสดงรายละเอียดลูกระสุนของหน้าไม้",
+  "wisb.options.showMobBucketTooltip": "แสดงรายละเอียดสัตว์ในถัง",
+  "wisb.options.showMobBucketTooltip.desc": "แสดงเลือดและลายสีของสัตว์ในถัง",
+  "wisb.options.time.full_format": "24 ชั่วโมง",
+  "wisb.options.time.twelve_format": "12 ชั่วโมง",
+  "wisb.options.timeformat": "รูปแบบเวลาของนาฬิกา",
+  "wisb.options.timeformat.desc": "เลือกรูปแบบการแสดงเวลา 24 ชั่วโมงหรือ 12 ชั่วโมง (AM/PM)"
+}

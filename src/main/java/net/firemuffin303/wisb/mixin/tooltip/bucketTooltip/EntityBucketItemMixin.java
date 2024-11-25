@@ -35,34 +35,35 @@ public abstract class EntityBucketItemMixin extends BucketItem {
     @Unique
     @Override
     public Optional<TooltipData> getTooltipData(ItemStack stack) {
-        if(this.entityType == EntityType.AXOLOTL){
-            if(stack.hasNbt()){
-                NbtCompound nbtCompound = stack.getNbt();
-                if(nbtCompound.contains("Variant") && nbtCompound.contains("Health") && nbtCompound.contains("Age")){
-                    int variant = nbtCompound.getInt("Variant");
-                    float health = nbtCompound.getFloat("Health");
-                    int age = nbtCompound.getInt("Age");
-                    return Optional.of(new AxolotlBucketTooltipComponent.AxolotlBucketTooltipData(age,health,variant));
+        if(ModConfig.getShowMobBucket()){
+            if(this.entityType == EntityType.AXOLOTL){
+                if(stack.hasNbt()){
+                    NbtCompound nbtCompound = stack.getNbt();
+                    if(nbtCompound.contains("Variant") && nbtCompound.contains("Health") && nbtCompound.contains("Age")){
+                        int variant = nbtCompound.getInt("Variant");
+                        float health = nbtCompound.getFloat("Health");
+                        int age = nbtCompound.getInt("Age");
+                        return Optional.of(new AxolotlBucketTooltipComponent.AxolotlBucketTooltipData(age,health,variant));
+                    }
                 }
-            }
-        } else if (this.entityType == EntityType.TROPICAL_FISH) {
-            if(stack.hasNbt()){
-                NbtCompound nbtCompound = stack.getNbt();
-                if(nbtCompound.contains("BucketVariantTag",3)){
-                    int bucketVariantTag = nbtCompound.getInt("BucketVariantTag");
-                    int health = nbtCompound.getInt("Health");
-                    return Optional.of(new TropicalfishTooltipComponent.TropicalfishTooltipData(bucketVariantTag,health));
-                }
+            } else if (this.entityType == EntityType.TROPICAL_FISH) {
+                if(stack.hasNbt()){
+                    NbtCompound nbtCompound = stack.getNbt();
+                    if(nbtCompound.contains("BucketVariantTag",3)){
+                        int bucketVariantTag = nbtCompound.getInt("BucketVariantTag");
+                        int health = nbtCompound.getInt("Health");
+                        return Optional.of(new TropicalfishTooltipComponent.TropicalfishTooltipData(bucketVariantTag,health));
+                    }
 
+                }
             }
         }
-
         return super.getTooltipData(stack);
     }
 
     @Inject(method = "appendTooltip",at = @At(value = "HEAD"), cancellable = true)
     public void wisb$appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext context, CallbackInfo ci) {
-       if(!ModConfig.disableWisbMobBucketTooltip){
+       if(ModConfig.getShowMobBucket()){
            ci.cancel();
        }
     }
