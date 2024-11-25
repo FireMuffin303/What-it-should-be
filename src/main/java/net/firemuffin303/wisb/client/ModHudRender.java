@@ -70,7 +70,7 @@ public class ModHudRender {
 
         int north = (int)  ((drawContext.getScaledWindowWidth()*bodyYaw) *-1) + drawContext.getScaledWindowWidth();
 
-        drawContext.enableScissor(x-(182/2),0,x+(182/2),12);
+        drawContext.enableScissor(x-(182/2),0,x+(182/2),19);
         drawContext.drawText(textRenderer, Text.of("N"),north,2,0xFFFFFF,true);
         drawContext.drawText(textRenderer, Text.of("E"),(north+x/2),2,0xFFFFFF,true);
         drawContext.drawText(textRenderer, Text.of("W"),(north-x/2),2,0xFFFFFF,true);
@@ -91,17 +91,17 @@ public class ModHudRender {
             drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
         }
 
-        ModHudRender.renderMap(world,clientPlayerEntity,drawContext,bodyYaw);
-
+        int coordY = 12;
+        if(ModHudRender.renderMap(textRenderer,world,clientPlayerEntity,drawContext,bodyYaw)){
+            coordY = 20;
+        }
         drawContext.disableScissor();
 
         //Coords
         Text coord = Text.translatable("wisb.compass.coordinates",String.format("%.2f",clientPlayerEntity.getX()) ,String.format("%.2f",clientPlayerEntity.getY()),String.format("%.2f",clientPlayerEntity.getZ()));
         int blockBorder = (textRenderer.getWidth(coord)/2) + 5;
-        drawContext.fill(x-blockBorder,10,x+blockBorder,22,0x50000000);
-        drawContext.drawCenteredTextWithShadow(textRenderer,coord,x,12,0xFFFFFF);
-
-
+        drawContext.fill(x-blockBorder,coordY,x+blockBorder,coordY+12,0x50000000);
+        drawContext.drawCenteredTextWithShadow(textRenderer,coord,x,coordY+2,0xFFFFFF);
     }
 
     public static void clockHUD(DrawContext drawContext,float delta, MinecraftClient minecraftClient){
@@ -111,7 +111,13 @@ public class ModHudRender {
         ClientWorld world = minecraftClient.world;
         drawContext.fill(x-60,1,x+60,24,0x50000000);
 
-        drawContext.drawCenteredTextWithShadow(textRenderer, Text.translatable("wisb.clock.worldtime",world.getTimeOfDay(),world.getTimeOfDay() / 24000L),x,3,0xFFFFFF);
+        double minuteTime = MathHelper.floorMod(world.getTimeOfDay() / 1000f,1f) * 60;
+        double hourTime = MathHelper.floorMod( (world.getTimeOfDay()/24000f)-0.75f, 1f) * 24 ;
+
+        Text AMPM = Text.translatable("wisb.clock.worldtime", String.format("%02d",hourTime < 12 ? (int)hourTime == 0 ? 12: (int)hourTime : (int)hourTime-12 == 0 ? 12: (int)hourTime-12),String.format("%02d",(int)minuteTime),world.getTimeOfDay() / 24000L);
+        Text fullFormat = Text.translatable("wisb.clock.worldtime", String.format("%02d",(int)hourTime),String.format("%02d",(int)minuteTime),world.getTimeOfDay() / 24000L);
+
+        drawContext.drawCenteredTextWithShadow(textRenderer,fullFormat ,x,3,0xFFFFFF);
         drawContext.drawCenteredTextWithShadow(textRenderer, Text.translatable("wisb.clock.playtime",
                 minecraftClient.player.getStatHandler().getStat(Stats.CUSTOM.getOrCreateStat(Stats.PLAY_TIME))
         ),x,13,0xFFFFFF);
@@ -174,60 +180,88 @@ public class ModHudRender {
         return ((MathHelper.floorMod (-angle + (bodyYaw-0.25f),1.0f) * screenWidth) * -1) + screenWidth;
     }
 
-    private static void renderMap(ClientWorld world,ClientPlayerEntity clientPlayerEntity,DrawContext drawContext,double bodyYaw){
+    private static boolean renderMap(TextRenderer textRenderer,ClientWorld world,ClientPlayerEntity clientPlayerEntity,DrawContext drawContext,double bodyYaw){
+        boolean isRenderBannerName = false;
         if(clientPlayerEntity.isHolding(Items.FILLED_MAP)){
             ItemStack map = clientPlayerEntity.getStackInHand(Hand.MAIN_HAND).isOf(Items.FILLED_MAP) ? clientPlayerEntity.getStackInHand(Hand.MAIN_HAND) : clientPlayerEntity.getStackInHand(Hand.OFF_HAND);
+            MapState mapState = FilledMapItem.getMapState(map,world);
 
-            if(map.hasNbt()){
-                NbtCompound nbtCompound = map.getNbt();
-                MapState mapState = FilledMapItem.getMapState(map,world);
+            if(!map.hasNbt()){
+                return false;
+            }
 
-                if(mapState != null){
-                    MapIcon mapIcon = null;
-                    MapBannerMarker mapBannerMarker = null;
+            NbtCompound nbtCompound = map.getNbt();
 
-                    for (MapBannerMarker bannerMarker : mapState.getBanners()) {
-                        mapBannerMarker = bannerMarker;
-                    }
+            if(mapState == null){
+              return false;
+            }
 
+            MapIcon mapIcon = null;
 
-                    if(nbtCompound != null && nbtCompound.contains("Decorations",9)){
-                        NbtList nbtList = nbtCompound.getList("Decorations",10);
-                        for(int j = 0; j < nbtList.size(); j++){
-                            NbtCompound decoData = nbtList.getCompound(j);
-                            double mapPosX = decoData.getDouble("x");
-                            double mapPosZ = decoData.getDouble("z");
-                            byte mapType = decoData.getByte("type");
+            for (MapBannerMarker bannerMarker : mapState.getBanners()) {
 
-                            Iterator<MapIcon> mapIconIterator = mapState.getIcons().iterator();
+                Vec3d vec3d = bannerMarker.getPos().toCenterPos();
+                double mapDestinationAngle = ModHudRender.calculateMarker(clientPlayerEntity,drawContext.getScaledWindowWidth(),bodyYaw,vec3d);
+                int b = bannerMarker.getIconType().getId();
+                int g = (b%16) * 8;
+                int h = (b/16) * 8;
 
-                            do {
-                                if(!mapIconIterator.hasNext()){
-                                    break;
-                                }
-                                mapIcon = mapIconIterator.next();
+                drawContext.setShaderColor(1f,1f,1f,1.0f);
+                drawContext.drawTexture(MAP_ICONS_TEXTURE,(int)mapDestinationAngle-8,1,g,h,8,8,128,128);
+                drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
 
-                            }while ((mapIcon.getTypeId() == 0 || mapIcon.getTypeId() != mapType) && !mapIcon.isAlwaysRendered());
+                if(bannerMarker.getName() != null){
+                    double textAngle = (mapDestinationAngle -2f) - (textRenderer.getWidth(bannerMarker.getName())/2.0f);
 
+                    int blockBorder = (textRenderer.getWidth(bannerMarker.getName())/2) + 2;
+                    drawContext.fill((int)(mapDestinationAngle-2f)-blockBorder,9,(int)(mapDestinationAngle-2f)+blockBorder,18,0x50000000);
 
-                            if(mapIcon != null){
-                                int b = mapIcon.getTypeId();
-                                int g = (b%16) * 8;
-                                int h = (b/16) * 8;
-
-
-                                Vec3d destination = new Vec3d(mapPosX,60d,mapPosZ);
-                                double mapDestinationAngle = ModHudRender.calculateMarker(clientPlayerEntity,drawContext.getScaledWindowWidth(),bodyYaw,destination);
-
-                                drawContext.setShaderColor(1f,1f,1f,1.0f);
-                                drawContext.drawTexture(MAP_ICONS_TEXTURE,(int)mapDestinationAngle-8,1,g,h,8,8,128,128);
-                                drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
-                            }
-                        }
+                    drawContext.drawText(textRenderer,bannerMarker.getName(),(int)textAngle,10,0xFFFFFF,false);
+                    if(textAngle > ((drawContext.getScaledWindowWidth()/2f)-(182f/2f) - textRenderer.getWidth(bannerMarker.getName())) && textAngle < (drawContext.getScaledWindowWidth()/2f)+(182f/2f)){
+                        isRenderBannerName = true;
                     }
 
                 }
             }
+
+
+            if(nbtCompound != null && nbtCompound.contains("Decorations",9)){
+                NbtList nbtList = nbtCompound.getList("Decorations",10);
+                for(int j = 0; j < nbtList.size(); j++){
+                    NbtCompound decoData = nbtList.getCompound(j);
+                    double mapPosX = decoData.getDouble("x");
+                    double mapPosZ = decoData.getDouble("z");
+                    byte mapType = decoData.getByte("type");
+
+                    Iterator<MapIcon> mapIconIterator = mapState.getIcons().iterator();
+
+                    do {
+                        if(!mapIconIterator.hasNext()){
+                            break;
+                        }
+                        mapIcon = mapIconIterator.next();
+
+                    }while ((mapIcon.getTypeId() == 0 || mapIcon.getTypeId() != mapType) && !mapIcon.isAlwaysRendered());
+
+
+                    if(mapIcon != null){
+                        int b = mapIcon.getTypeId();
+                        int g = (b%16) * 8;
+                        int h = (b/16) * 8;
+
+
+                        Vec3d destination = new Vec3d(mapPosX,60d,mapPosZ);
+                        double mapDestinationAngle = ModHudRender.calculateMarker(clientPlayerEntity,drawContext.getScaledWindowWidth(),bodyYaw,destination);
+
+                        drawContext.setShaderColor(1f,1f,1f,1.0f);
+                        drawContext.drawTexture(MAP_ICONS_TEXTURE,(int)mapDestinationAngle-8,1,g,h,8,8,128,128);
+                        drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
+                    }
+                }
+            }
         }
+
+        return isRenderBannerName;
+
     }
 }

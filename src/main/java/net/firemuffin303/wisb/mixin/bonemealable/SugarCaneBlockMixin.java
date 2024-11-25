@@ -1,4 +1,4 @@
-package net.firemuffin303.wisb.mixin;
+package net.firemuffin303.wisb.mixin.bonemealable;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import net.firemuffin303.wisb.Wisb;

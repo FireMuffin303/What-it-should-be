@@ -1,9 +1,7 @@
-package net.firemuffin303.wisb.mixin.BucketTooltip.tropicalFish;
+package net.firemuffin303.wisb.mixin.tooltip.bucketTooltip.tropicalFish;
 
 import net.minecraft.entity.passive.TropicalFishEntity;
-import net.minecraft.util.DyeColor;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(TropicalFishEntity.class)

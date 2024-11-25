@@ -12,7 +12,7 @@ public class ModLangProvider extends FabricLanguageProvider {
     @Override
     public void generateTranslations(TranslationBuilder translationBuilder) {
         translationBuilder.add("wisb.compass.coordinates","X : %.2d | Y : %.2d | Z : %.2d");
-        translationBuilder.add("wisb.clock.worldtime","Time : %s | Day : %s");
+        translationBuilder.add("wisb.clock.worldtime","Time : %s:%s | Day : %s");
         translationBuilder.add("wisb.clock.playtime","Play time : %s");
         translationBuilder.add("wisb.beehive.tooltip.honey_level","%s / %s");
         translationBuilder.add("wisb.axolotl_bucket.tooltip.variant","Variant : %s");

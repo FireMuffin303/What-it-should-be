@@ -4,10 +4,20 @@
   "package": "net.firemuffin303.wisb.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "BlockItemMixin",
-    "SugarCaneBlockMixin",
-    "BucketTooltip.EntityBucketItemMixin",
-    "BucketTooltip.tropicalFish.TropicalFishEntityAccessor"
+    "armorstand.AmorStandItemMixin",
+    "bonemealable.LilyPadBlockMixin",
+    "bonemealable.NetherWartBlockMixin",
+    "bonemealable.SugarCaneBlockMixin",
+    "creeperExplosion.WorldMixin",
+    "hitbox.ZombieEntityMixin",
+    "itemframe.ItemFrameEntityMixin",
+    "map.MapStateAccessor",
+    "map.MapStatePlayerUpdateTrackerMixin",
+    "map.MapUpdateS2CPacketMixin",
+    "tooltip.BlockItemMixin",
+    "tooltip.CrossbowItemMixin",
+    "tooltip.bucketTooltip.EntityBucketItemMixin",
+    "tooltip.bucketTooltip.tropicalFish.TropicalFishEntityAccessor"
   ],
   "client": [
     "BossBarHudAccessor"

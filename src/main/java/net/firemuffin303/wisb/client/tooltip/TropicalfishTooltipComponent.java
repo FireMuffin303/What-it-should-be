@@ -1,7 +1,7 @@
 package net.firemuffin303.wisb.client.tooltip;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.firemuffin303.wisb.mixin.BucketTooltip.tropicalFish.TropicalFishEntityAccessor;
+import net.firemuffin303.wisb.mixin.tooltip.bucketTooltip.tropicalFish.TropicalFishEntityAccessor;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.DrawContext;
@@ -14,7 +14,6 @@ import net.minecraft.text.Text;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
 import org.joml.Quaternionf;
 
 public class TropicalfishTooltipComponent implements TooltipComponent {

@@ -1,4 +1,4 @@
-package net.firemuffin303.wisb.mixin.BucketTooltip;
+package net.firemuffin303.wisb.mixin.tooltip.bucketTooltip;
 
 import net.firemuffin303.wisb.client.tooltip.AxolotlBucketTooltipComponent;
 import net.firemuffin303.wisb.client.tooltip.TropicalfishTooltipComponent;
