@@ -1,4 +1,18 @@
 {
+  "gamerule.wisb:bonemealableLilyPad": "Lily Pad can be bonemeal",
+  "gamerule.wisb:bonemealableNetherwart": "Nether Wart can be bonemeal",
+  "gamerule.wisb:bonemealableSugarCane": "Sugar Cane can be bonemeal",
+  "gamerule.wisb:creaperExplosionDestroyBlock": "Creeper Explosion Destroy Blocks",
+  "gamerule.wisb:easierBabyZombie": "Easier Baby zombie",
+  "gamerule.wisb:shearAbleItemFrame": "Shearable Item Frame",
+  "gamerule.wisb:showClockGUI": "Show Clock GUI",
+  "gamerule.wisb:showCompassGUI": "Show Compass GUI",
+  "gamerule.wisb:showTreasureInCompassGUI": "Show Treasure in Compass GUI",
+  "gamerule.wisb:spawnArmorStandWithArm": "Spawn Armor Stand with arms",
+  "gamerule.wisb:sugarCaneGrowHeight": "Sugar Cane grow height",
+  "modmenu.descriptionTranslation.wisb": "A Minecraft mod which focus on revamping or reworking Vanilla mechanics to what it should be. At least from FireMuffin303's thought... Most of features are configurable by Mod config for client side and Game Rules for server side. Feel free to config to what you like! ",
+  "modmenu.nameTranslation.wisb": "What It Should Be",
+  "modmenu.summaryTranslation.wisb": "Revamping Minecraft to what it should be.",
   "wisb.axolotl_bucket.tooltip.variant": "Variant : %s",
   "wisb.beehive.tooltip.honey_level": "%s / %s",
   "wisb.clock.playtime": "Play time : %s",
@@ -16,5 +30,6 @@
   "wisb.options.time.full_format": "24 Hour",
   "wisb.options.time.twelve_format": "12 Hour",
   "wisb.options.timeformat": "Clock Time Format",
-  "wisb.options.timeformat.desc": "Choose between 24-Hour or 12-Hour (AM/PM) format"
+  "wisb.options.timeformat.desc": "Choose between 24-Hour or 12-Hour (AM/PM) format",
+  "wisb.renameNameTag.title": "Rename Name Tag"
 }

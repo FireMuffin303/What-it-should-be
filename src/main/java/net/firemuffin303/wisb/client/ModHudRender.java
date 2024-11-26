@@ -3,6 +3,7 @@ package net.firemuffin303.wisb.client;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.firemuffin303.wisb.Wisb;
+import net.firemuffin303.wisb.common.WisbWorldComponent;
 import net.firemuffin303.wisb.config.ModConfig;
 import net.firemuffin303.wisb.mixin.BossBarHudAccessor;
 import net.minecraft.client.MinecraftClient;
@@ -18,6 +19,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
+import net.minecraft.util.Clearable;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.GlobalPos;
@@ -33,16 +35,18 @@ public class ModHudRender {
     public static void init(DrawContext drawContext,float delta){
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         Objects.requireNonNull(minecraftClient.player);
+        Objects.requireNonNull(minecraftClient.world);
+        ClientWorld clientWorld = minecraftClient.world;
         if(shouldRender(minecraftClient)){
-            if(minecraftClient.player.isHolding(Items.COMPASS) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.COMPASS)){
+            if(minecraftClient.player.isHolding(Items.COMPASS) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.COMPASS) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().compassGUI){
                 compassHUD(drawContext,delta,minecraftClient);
             }
 
-            if(minecraftClient.player.isHolding(Items.CLOCK) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.CLOCK)){
+            if(minecraftClient.player.isHolding(Items.CLOCK) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.CLOCK) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().clockGUI){
                 clockHUD(drawContext,delta,minecraftClient);
             }
 
-            if(minecraftClient.player.isHolding(Items.RECOVERY_COMPASS) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.RECOVERY_COMPASS)){
+            if(minecraftClient.player.isHolding(Items.RECOVERY_COMPASS) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.RECOVERY_COMPASS) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().compassGUI){
                 recoveryCompassHUD(drawContext,delta,minecraftClient);
             }
         }
@@ -231,7 +235,7 @@ public class ModHudRender {
             }
 
 
-            if(nbtCompound != null && nbtCompound.contains("Decorations",9)){
+            if(nbtCompound != null && nbtCompound.contains("Decorations",9) && ((WisbWorldComponent.WisbWorldComponentAccessor)world).wisb$getWisbWorldComponent().showTressureInCompassGUI){
                 NbtList nbtList = nbtCompound.getList("Decorations",10);
                 for(int j = 0; j < nbtList.size(); j++){
                     NbtCompound decoData = nbtList.getCompound(j);

@@ -3,21 +3,16 @@ package net.firemuffin303.wisb.config;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.serialization.Codec;
-import com.sun.jna.platform.unix.X11;
 import net.fabricmc.loader.api.FabricLoader;
 import net.firemuffin303.wisb.Wisb;
-import net.minecraft.client.option.AttackIndicator;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.text.Text;
 import net.minecraft.util.TranslatableOption;
-import net.minecraft.util.function.ValueLists;
 import net.minecraft.util.math.MathHelper;
 
 import java.io.*;
-import java.sql.Time;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.IntFunction;
 
 public class ModConfig {
     private static File file;

@@ -20,7 +20,8 @@
     "tooltip.bucketTooltip.tropicalFish.TropicalFishEntityAccessor"
   ],
   "client": [
-    "BossBarHudAccessor"
+    "BossBarHudAccessor",
+    "ClientWorldComponentMixin"
   ],
   "injectors": {
     "defaultRequire": 1

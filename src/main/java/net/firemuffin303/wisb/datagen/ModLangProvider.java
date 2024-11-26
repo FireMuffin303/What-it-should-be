@@ -29,6 +29,25 @@ public class ModLangProvider extends FabricLanguageProvider {
 
         translationBuilder.add("wisb.options.time.full_format","24 Hour");
         translationBuilder.add("wisb.options.time.twelve_format","12 Hour");
+
+        translationBuilder.add("wisb.renameNameTag.title","Rename Name Tag");
+
+        // Game Rule
+        translationBuilder.add("gamerule.wisb:sugarCaneGrowHeight","Sugar Cane grow height");
+        translationBuilder.add("gamerule.wisb:bonemealableSugarCane","Sugar Cane can be bonemeal");
+        translationBuilder.add("gamerule.wisb:bonemealableNetherwart","Nether Wart can be bonemeal");
+        translationBuilder.add("gamerule.wisb:bonemealableLilyPad","Lily Pad can be bonemeal");
+        translationBuilder.add("gamerule.wisb:easierBabyZombie","Easier Baby zombie");
+        translationBuilder.add("gamerule.wisb:creaperExplosionDestroyBlock","Creeper Explosion Destroy Blocks");
+        translationBuilder.add("gamerule.wisb:spawnArmorStandWithArm","Spawn Armor Stand with arms");
+        translationBuilder.add("gamerule.wisb:shearAbleItemFrame","Shearable Item Frame");
+        translationBuilder.add("gamerule.wisb:showCompassGUI","Show Compass GUI");
+        translationBuilder.add("gamerule.wisb:showTreasureInCompassGUI","Show Treasure in Compass GUI");
+        translationBuilder.add("gamerule.wisb:showClockGUI","Show Clock GUI");
+
+        translationBuilder.add("modmenu.descriptionTranslation.wisb","A Minecraft mod which focus on revamping or reworking Vanilla mechanics to what it should be. At least from FireMuffin303's thought... Most of features are configurable by Mod config for client side and Game Rules for server side. Feel free to config to what you like! ");
+        translationBuilder.add("modmenu.nameTranslation.wisb","What It Should Be");
+        translationBuilder.add("modmenu.summaryTranslation.wisb","Revamping Minecraft to what it should be.");
     }
 
     public static class ThaiLangProvider  extends FabricLanguageProvider {
@@ -58,6 +77,19 @@ public class ModLangProvider extends FabricLanguageProvider {
 
             translationBuilder.add("wisb.options.time.full_format","24 ชั่วโมง");
             translationBuilder.add("wisb.options.time.twelve_format","12 ชั่วโมง");
+
+            // Game Rule
+            translationBuilder.add("gamerule.wisb:sugarCaneGrowHeight","ระดับความสูงของต้นอ้อย");
+            translationBuilder.add("gamerule.wisb:bonemealableSugarCane","ใช้ผงกระดูกกับต้นอ้อย");
+            translationBuilder.add("gamerule.wisb:bonemealableNetherwart","ใช้ผงกระดูกกับหูดเนเธอร์");
+            translationBuilder.add("gamerule.wisb:bonemealableLilyPad","ใช้ผงกระดูกกับใบบัว");
+            translationBuilder.add("gamerule.wisb:easierBabyZombie","ซอมบี้เด็กง่ายกว่าเดิม");
+            translationBuilder.add("gamerule.wisb:creaperExplosionDestroyBlock","ระเบิดครีปเปอร์ทำลายบล๊อค");
+            translationBuilder.add("gamerule.wisb:spawnArmorStandWithArm","หุ่นโชว์ของมีแขน");
+            translationBuilder.add("gamerule.wisb:shearAbleItemFrame","ตัดแผ่นโชว์ไอเทม");
+            translationBuilder.add("gamerule.wisb:showCompassGUI","แสดงหน้าต่างเข็มทิศ");
+            translationBuilder.add("gamerule.wisb:showTreasureInCompassGUI","แสดงสมบัติบนหน้าเข็มทิศ");
+            translationBuilder.add("gamerule.wisb:showClockGUI","แสดงหน้าต่างนาฬิกา");
         }
     }
 }

@@ -21,6 +21,7 @@ public class ModConfigScreen extends Screen {
     @Override
     protected void init() {
         super.init();
+
         this.list = new OptionListWidget(this.client,this.width,this.height,32,this.height-50,25);
         this.list.addAll(new SimpleOption[]{ModConfig.showWisbMobBucketTooltip,ModConfig.showWisbCrossbowBucketTooltip,ModConfig.showBeehiveTooltip,ModConfig.timeFormat,ModConfig.preciseCoordinate});
         this.addSelectableChild(this.list);

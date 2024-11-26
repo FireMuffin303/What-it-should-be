@@ -3,6 +3,7 @@ package net.firemuffin303.wisb.mixin.hitbox;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.logging.LogUtils;
 import net.firemuffin303.wisb.Wisb;
+import net.firemuffin303.wisb.common.WisbWorldComponent;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
@@ -57,7 +58,14 @@ public abstract class ZombieEntityMixin extends HostileEntity {
     //Gamerule need to send packet
     @Override
     public EntityDimensions getDimensions(EntityPose pose) {
+        boolean easierZombie = false;
+        if(this.getWorld().isClient){
+            easierZombie = ((WisbWorldComponent.WisbWorldComponentAccessor)this.getWorld()).wisb$getWisbWorldComponent().easierBabyZombie;
+        }else if(this.getWorld() instanceof ServerWorld serverWorld){
+            easierZombie = serverWorld.getGameRules().getBoolean(Wisb.EASIER_BABY_ZOMBIE);
+        }
+
         EntityDimensions entityDimensions = super.getDimensions(pose);
-        return this.isBaby() ? entityDimensions.scaled(1.8f,1.25f) : super.getDimensions(pose) ;
+        return this.isBaby() && easierZombie  ? entityDimensions.scaled(1.8f,1.25f) : super.getDimensions(pose) ;
     }
 }

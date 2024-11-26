@@ -1,6 +1,7 @@
 package net.firemuffin303.wisb.mixin.bonemealable;
 
 import net.firemuffin303.wisb.Wisb;
+import net.firemuffin303.wisb.common.WisbWorldComponent;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.NetherWartBlock;
@@ -25,11 +26,14 @@ public abstract class NetherWartBlockMixin extends PlantBlock implements Fertili
 
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
-        boolean bonemealable = false;
+        boolean bonemealable;
         if(!isClient){
             ServerWorld serverWorld = (ServerWorld) world;
             bonemealable = serverWorld.getGameRules().getBoolean(Wisb.BONEMEALABLE_NETHERWART);
+        }else {
+            bonemealable =((WisbWorldComponent.WisbWorldComponentAccessor)world).wisb$getWisbWorldComponent().bonemealAbleNetherWart;
         }
+
         return state.get(AGE) < 3 && bonemealable;
     }
 

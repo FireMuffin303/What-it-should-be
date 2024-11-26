@@ -5,17 +5,14 @@
     "#": {
       "item": "minecraft:compass"
     },
-    "C": {
-      "item": "minecraft:copper_ingot"
-    },
     "S": {
       "item": "minecraft:chiseled_stone_bricks"
     }
   },
   "pattern": [
-    "SCS",
-    "C#C",
-    "SCS"
+    "SSS",
+    "S#S",
+    "SSS"
   ],
   "result": {
     "item": "minecraft:lodestone"

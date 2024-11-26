@@ -2,6 +2,7 @@ package net.firemuffin303.wisb.mixin.bonemealable;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import net.firemuffin303.wisb.Wisb;
+import net.firemuffin303.wisb.common.WisbWorldComponent;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.state.property.IntProperty;
@@ -29,9 +30,18 @@ public abstract class SugarCaneBlockMixin extends Block implements Fertilizable 
     @Unique
     @Override
     public boolean isFertilizable(WorldView world, BlockPos pos, BlockState state, boolean isClient) {
-        int growthHeight = 3;
-        if(world instanceof ServerWorld serverWorld){
-            growthHeight = serverWorld.getGameRules().getInt(Wisb.SUGAR_CANE_HEIGHT);
+        boolean bonemeal = false;
+        int growHeight = 3;
+        if(isClient){
+            bonemeal = ((WisbWorldComponent.WisbWorldComponentAccessor)world).wisb$getWisbWorldComponent().bonemealAbleSugarCane;
+            growHeight = ((WisbWorldComponent.WisbWorldComponentAccessor)world).wisb$getWisbWorldComponent().sugarCaneGrowHeight;
+        }else if(world instanceof ServerWorld serverWorld){
+            bonemeal  = serverWorld.getGameRules().getBoolean(Wisb.BONEMEAL_ABLE_SUGAR_CANE);
+            growHeight = serverWorld.getGameRules().getInt(Wisb.SUGAR_CANE_HEIGHT);
+        }
+
+        if(!bonemeal){
+            return false;
         }
 
         BlockPos sugarCaneCheckPos = pos;
@@ -43,7 +53,7 @@ public abstract class SugarCaneBlockMixin extends Block implements Fertilizable 
             sugarCaneCheckPos = sugarCaneCheckPos.down();
         }while(world.getBlockState(sugarCaneCheckPos).isOf(Blocks.SUGAR_CANE));
 
-        if (height < growthHeight){
+        if (height < growHeight){
             sugarCaneCheckPos = pos;
             do{
                 sugarCaneCheckPos = sugarCaneCheckPos.up();
@@ -54,7 +64,7 @@ public abstract class SugarCaneBlockMixin extends Block implements Fertilizable 
         }
 
 
-        return height < growthHeight && world.isAir(sugarCaneCheckPos);
+        return height < growHeight && world.isAir(sugarCaneCheckPos);
     }
 
     @Unique
