@@ -1,6 +1,6 @@
 package net.firemuffin303.wisb.mixin.bonemealable;
 
-import net.firemuffin303.wisb.Wisb;
+import net.firemuffin303.wisb.common.registry.ModGameRules;
 import net.firemuffin303.wisb.common.WisbWorldComponent;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
@@ -29,7 +29,7 @@ public abstract class NetherWartBlockMixin extends PlantBlock implements Fertili
         boolean bonemealable;
         if(!isClient){
             ServerWorld serverWorld = (ServerWorld) world;
-            bonemealable = serverWorld.getGameRules().getBoolean(Wisb.BONEMEALABLE_NETHERWART);
+            bonemealable = serverWorld.getGameRules().getBoolean(ModGameRules.BONEMEALABLE_NETHERWART);
         }else {
             bonemealable =((WisbWorldComponent.WisbWorldComponentAccessor)world).wisb$getWisbWorldComponent().bonemealAbleNetherWart;
         }

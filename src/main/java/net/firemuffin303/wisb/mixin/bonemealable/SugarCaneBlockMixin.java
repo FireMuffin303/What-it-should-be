@@ -1,7 +1,7 @@
 package net.firemuffin303.wisb.mixin.bonemealable;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import net.firemuffin303.wisb.Wisb;
+import net.firemuffin303.wisb.common.registry.ModGameRules;
 import net.firemuffin303.wisb.common.WisbWorldComponent;
 import net.minecraft.block.*;
 import net.minecraft.server.world.ServerWorld;
@@ -23,7 +23,7 @@ public abstract class SugarCaneBlockMixin extends Block implements Fertilizable 
 
     @ModifyConstant(method = "randomTick",constant = @Constant(intValue = 3))
     public int wisb$randomTick(int constant, @Local(argsOnly = true) ServerWorld serverWorld){
-        return serverWorld.getGameRules().getInt(Wisb.SUGAR_CANE_HEIGHT);
+        return serverWorld.getGameRules().getInt(ModGameRules.SUGAR_CANE_HEIGHT);
     }
 
 
@@ -36,8 +36,8 @@ public abstract class SugarCaneBlockMixin extends Block implements Fertilizable 
             bonemeal = ((WisbWorldComponent.WisbWorldComponentAccessor)world).wisb$getWisbWorldComponent().bonemealAbleSugarCane;
             growHeight = ((WisbWorldComponent.WisbWorldComponentAccessor)world).wisb$getWisbWorldComponent().sugarCaneGrowHeight;
         }else if(world instanceof ServerWorld serverWorld){
-            bonemeal  = serverWorld.getGameRules().getBoolean(Wisb.BONEMEAL_ABLE_SUGAR_CANE);
-            growHeight = serverWorld.getGameRules().getInt(Wisb.SUGAR_CANE_HEIGHT);
+            bonemeal  = serverWorld.getGameRules().getBoolean(ModGameRules.BONEMEAL_ABLE_SUGAR_CANE);
+            growHeight = serverWorld.getGameRules().getInt(ModGameRules.SUGAR_CANE_HEIGHT);
         }
 
         if(!bonemeal){

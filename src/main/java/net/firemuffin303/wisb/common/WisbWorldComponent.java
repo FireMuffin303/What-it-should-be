@@ -3,6 +3,7 @@ package net.firemuffin303.wisb.common;
 import net.fabricmc.fabric.api.networking.v1.FabricPacket;
 import net.fabricmc.fabric.api.networking.v1.PacketType;
 import net.firemuffin303.wisb.Wisb;
+import net.firemuffin303.wisb.common.registry.ModGameRules;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.world.ServerWorld;
 
@@ -46,15 +47,15 @@ public class WisbWorldComponent {
         public int renameCost;
 
         public WisbWorldSettingPacket(ServerWorld world){
-            this.bonemealAbleSugarCane = world.getGameRules().getBoolean(Wisb.BONEMEAL_ABLE_SUGAR_CANE);
-            this.sugarCaneGrowHeight = world.getGameRules().getInt(Wisb.SUGAR_CANE_HEIGHT);
-            this.bonemealAbleLilyPad = world.getGameRules().getBoolean(Wisb.BONEMEALABLE_LILLYPAD);
-            this.bonemealAbleNetherWart = world.getGameRules().getBoolean(Wisb.BONEMEALABLE_NETHERWART);
-            this.easierBabyZombie = world.getGameRules().getBoolean(Wisb.EASIER_BABY_ZOMBIE);
-            this.compassGUI = world.getGameRules().getBoolean(Wisb.COMPASS_GUI);
-            this.showTreasureInCompassGUI = world.getGameRules().getBoolean(Wisb.SHOW_TREASURE_IN_COMPASS_GUI);
-            this.clockGUI = world.getGameRules().getBoolean(Wisb.CLOCK_GUI);
-            this.renameCost = world.getGameRules().getInt(Wisb.RENAME_NAMETAG_COST);
+            this.bonemealAbleSugarCane = world.getGameRules().getBoolean(ModGameRules.BONEMEAL_ABLE_SUGAR_CANE);
+            this.sugarCaneGrowHeight = world.getGameRules().getInt(ModGameRules.SUGAR_CANE_HEIGHT);
+            this.bonemealAbleLilyPad = world.getGameRules().getBoolean(ModGameRules.BONEMEALABLE_LILLYPAD);
+            this.bonemealAbleNetherWart = world.getGameRules().getBoolean(ModGameRules.BONEMEALABLE_NETHERWART);
+            this.easierBabyZombie = world.getGameRules().getBoolean(ModGameRules.EASIER_BABY_ZOMBIE);
+            this.compassGUI = world.getGameRules().getBoolean(ModGameRules.COMPASS_GUI);
+            this.showTreasureInCompassGUI = world.getGameRules().getBoolean(ModGameRules.SHOW_TREASURE_IN_COMPASS_GUI);
+            this.clockGUI = world.getGameRules().getBoolean(ModGameRules.CLOCK_GUI);
+            this.renameCost = world.getGameRules().getInt(ModGameRules.RENAME_NAMETAG_COST);
         }
 
         public WisbWorldSettingPacket(PacketByteBuf packetByteBuf){

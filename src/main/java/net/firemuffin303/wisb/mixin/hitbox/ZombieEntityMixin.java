@@ -1,13 +1,10 @@
 package net.firemuffin303.wisb.mixin.hitbox;
 
-import com.llamalad7.mixinextras.sugar.Local;
-import com.mojang.logging.LogUtils;
-import net.firemuffin303.wisb.Wisb;
+import net.firemuffin303.wisb.common.registry.ModGameRules;
 import net.firemuffin303.wisb.common.WisbWorldComponent;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -41,7 +38,7 @@ public abstract class ZombieEntityMixin extends HostileEntity {
     @Inject(method = "setBaby",at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/attribute/EntityAttributeInstance;removeModifier(Lnet/minecraft/entity/attribute/EntityAttributeModifier;)V"))
     public void wisb$removeModifierBaby(boolean baby, CallbackInfo ci){
         ServerWorld serverWorld = (ServerWorld) this.getWorld();
-        if(serverWorld.getGameRules().getBoolean(Wisb.EASIER_BABY_ZOMBIE)){
+        if(serverWorld.getGameRules().getBoolean(ModGameRules.EASIER_BABY_ZOMBIE)){
             entityAttributeInstance.removeModifier(BABY_HEALTH_ID);
         }
     }
@@ -49,7 +46,7 @@ public abstract class ZombieEntityMixin extends HostileEntity {
     @Inject(method = "setBaby",at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/attribute/EntityAttributeInstance;addTemporaryModifier(Lnet/minecraft/entity/attribute/EntityAttributeModifier;)V"))
     public void wisb$applyBabyHeath(boolean baby, CallbackInfo ci){
         ServerWorld serverWorld = (ServerWorld) this.getWorld();
-        if(serverWorld.getGameRules().getBoolean(Wisb.EASIER_BABY_ZOMBIE)) {
+        if(serverWorld.getGameRules().getBoolean(ModGameRules.EASIER_BABY_ZOMBIE)) {
             entityAttributeInstance.addTemporaryModifier(BABY_HEALTH_ID);
             this.setHealth((float) this.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH).getValue());
         }
@@ -62,7 +59,7 @@ public abstract class ZombieEntityMixin extends HostileEntity {
         if(this.getWorld().isClient){
             easierZombie = ((WisbWorldComponent.WisbWorldComponentAccessor)this.getWorld()).wisb$getWisbWorldComponent().easierBabyZombie;
         }else if(this.getWorld() instanceof ServerWorld serverWorld){
-            easierZombie = serverWorld.getGameRules().getBoolean(Wisb.EASIER_BABY_ZOMBIE);
+            easierZombie = serverWorld.getGameRules().getBoolean(ModGameRules.EASIER_BABY_ZOMBIE);
         }
 
         EntityDimensions entityDimensions = super.getDimensions(pose);

@@ -1,8 +1,6 @@
 package net.firemuffin303.wisb.mixin.itemframe;
 
-import com.llamalad7.mixinextras.sugar.Local;
-import com.llamalad7.mixinextras.sugar.ref.LocalRef;
-import net.firemuffin303.wisb.Wisb;
+import net.firemuffin303.wisb.common.registry.ModGameRules;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.decoration.AbstractDecorationEntity;
@@ -30,7 +28,7 @@ public abstract class ItemFrameEntityMixin extends AbstractDecorationEntity {
     @Inject(method = "interact",at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/decoration/ItemFrameEntity;playSound(Lnet/minecraft/sound/SoundEvent;FF)V"), cancellable = true)
     public void wisb$shearInteraction(PlayerEntity player, Hand hand, CallbackInfoReturnable<ActionResult> cir){
         ItemStack itemStack = player.getStackInHand(hand);
-        if(itemStack.isOf(Items.SHEARS) && player.isSneaking() && this.getWorld() instanceof ServerWorld serverWorld && serverWorld.getGameRules().getBoolean(Wisb.SHEARABLE_ITEM_FRAME)){
+        if(itemStack.isOf(Items.SHEARS) && player.isSneaking() && this.getWorld() instanceof ServerWorld serverWorld && serverWorld.getGameRules().getBoolean(ModGameRules.SHEARABLE_ITEM_FRAME)){
             this.setFlag(5,true);
             this.playSound(SoundEvents.ENTITY_SHEEP_SHEAR,1f,1f);
             this.emitGameEvent(GameEvent.BLOCK_CHANGE,player);

@@ -17,11 +17,13 @@
     "tooltip.BlockItemMixin",
     "tooltip.CrossbowItemMixin",
     "tooltip.bucketTooltip.EntityBucketItemMixin",
-    "tooltip.bucketTooltip.tropicalFish.TropicalFishEntityAccessor"
+    "tooltip.bucketTooltip.tropicalFish.TropicalFishEntityAccessor",
+    "turtle.TurtleEntityMixin"
   ],
   "client": [
     "BossBarHudAccessor",
-    "ClientWorldComponentMixin"
+    "ClientWorldComponentMixin",
+    "turtle.TurtleEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

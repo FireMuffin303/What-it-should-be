@@ -16,6 +16,9 @@ public class ModLangProvider extends FabricLanguageProvider {
         translationBuilder.add("wisb.clock.playtime","Play time : %s");
         translationBuilder.add("wisb.beehive.tooltip.honey_level","%s / %s");
         translationBuilder.add("wisb.axolotl_bucket.tooltip.variant","Variant : %s");
+
+        // Config
+        translationBuilder.add("wisb.config.title","What It Should Be Config");
         translationBuilder.add("wisb.options.showMobBucketTooltip","Show Mob Bucket Tooltip");
         translationBuilder.add("wisb.options.showMobBucketTooltip.desc","Show mob's health & variant.");
         translationBuilder.add("wisb.options.showCrossbowTooltip","Show Crossbow Tooltip");
@@ -26,10 +29,11 @@ public class ModLangProvider extends FabricLanguageProvider {
         translationBuilder.add("wisb.options.timeformat.desc","Choose between 24-Hour or 12-Hour (AM/PM) format");
         translationBuilder.add("wisb.options.preciseCoordinate","Compass Precise Coordinate");
         translationBuilder.add("wisb.options.preciseCoordinate.desc","Show decimal number of current coordinate");
-
         translationBuilder.add("wisb.options.time.full_format","24 Hour");
         translationBuilder.add("wisb.options.time.twelve_format","12 Hour");
+        translationBuilder.add("wisb.options.sneakingToRenameNameTag","Sneak To Rename Name Tag");
 
+        //Rename Name Tag
         translationBuilder.add("wisb.renameNameTag.title","Rename Name Tag");
 
         // Game Rule
@@ -45,9 +49,14 @@ public class ModLangProvider extends FabricLanguageProvider {
         translationBuilder.add("gamerule.wisb:showTreasureInCompassGUI","Show Treasure in Compass GUI");
         translationBuilder.add("gamerule.wisb:showClockGUI","Show Clock GUI");
 
+        //ModMenu
         translationBuilder.add("modmenu.descriptionTranslation.wisb","A Minecraft mod which focus on revamping or reworking Vanilla mechanics to what it should be. At least from FireMuffin303's thought... Most of features are configurable by Mod config for client side and Game Rules for server side. Feel free to config to what you like! ");
         translationBuilder.add("modmenu.nameTranslation.wisb","What It Should Be");
         translationBuilder.add("modmenu.summaryTranslation.wisb","Revamping Minecraft to what it should be.");
+
+        //JEI
+        translationBuilder.add("wisb.jei.mobbrush.title","Wisb's Mob Brushing");
+        translationBuilder.add("wisb.jei.mobbrush.turtle","Turtles swim for a while, then get barnacle on their back. Use brush to clean them off.");
     }
 
     public static class ThaiLangProvider  extends FabricLanguageProvider {

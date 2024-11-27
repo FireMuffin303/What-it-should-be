@@ -1,6 +1,6 @@
 package net.firemuffin303.wisb.mixin.bonemealable;
 
-import net.firemuffin303.wisb.Wisb;
+import net.firemuffin303.wisb.common.registry.ModGameRules;
 import net.firemuffin303.wisb.common.WisbWorldComponent;
 import net.minecraft.block.*;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ public abstract class LilyPadBlockMixin extends PlantBlock implements Fertilizab
         if(isClient){
             bonemealable = ((WisbWorldComponent.WisbWorldComponentAccessor)world).wisb$getWisbWorldComponent().bonemealAbleLilyPad;
         }else if (world instanceof ServerWorld serverWorld){
-            bonemealable = serverWorld.getGameRules().getBoolean(Wisb.BONEMEALABLE_LILLYPAD);
+            bonemealable = serverWorld.getGameRules().getBoolean(ModGameRules.BONEMEALABLE_LILLYPAD);
         }
         return bonemealable;
     }

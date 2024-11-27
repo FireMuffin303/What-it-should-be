@@ -1,5 +1,8 @@
 package net.firemuffin303.wisb.client;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
@@ -22,6 +25,9 @@ import net.minecraft.item.Items;
 import net.minecraft.util.TypedActionResult;
 
 public class WisbClient implements ClientModInitializer {
+
+    public static final Gson GSON = (new GsonBuilder()).setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
+
 
     @Override
     public void onInitializeClient() {
@@ -51,9 +57,19 @@ public class WisbClient implements ClientModInitializer {
         UseItemCallback.EVENT.register((playerEntity, world, hand) -> {
             ItemStack itemStack = playerEntity.getStackInHand(hand);
             if(world.isClient){
-                if(itemStack.isOf(Items.NAME_TAG) && playerEntity.isSneaking()){
+                if(itemStack.isOf(Items.NAME_TAG)){
                     ClientWorld clientWorld = (ClientWorld) world;
+                    boolean isSettingOn = ModConfig.getSneakingToRenameNameTag();
+                    if(isSettingOn){
+                        if(playerEntity.isSneaking()){
+                            MinecraftClient.getInstance().setScreen(new EditNameTagScreen(itemStack,hand,clientWorld));
+                            return TypedActionResult.success(playerEntity.getStackInHand(hand));
+                        }
+                        return TypedActionResult.pass(ItemStack.EMPTY);
+                    }
+
                     MinecraftClient.getInstance().setScreen(new EditNameTagScreen(itemStack,hand,clientWorld));
+
                     return TypedActionResult.success(playerEntity.getStackInHand(hand));
                 }
             }

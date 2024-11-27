@@ -1,7 +1,7 @@
 package net.firemuffin303.wisb.mixin.armorstand;
 
 import com.llamalad7.mixinextras.sugar.Local;
-import net.firemuffin303.wisb.Wisb;
+import net.firemuffin303.wisb.common.registry.ModGameRules;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.item.ArmorStandItem;
 import net.minecraft.item.ItemUsageContext;
@@ -17,7 +17,7 @@ public abstract class AmorStandItemMixin {
 
     @Inject(method = "useOnBlock",at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;floor(F)I"))
     public void wisb$setShowArmWhenSpawn(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir, @Local ArmorStandEntity armorStandEntity, @Local ServerWorld world){
-        if(world.getGameRules().getBoolean(Wisb.SPAWN_ARMOR_STAND_WITH_ARMS)){
+        if(world.getGameRules().getBoolean(ModGameRules.SPAWN_ARMOR_STAND_WITH_ARMS)){
             armorStandEntity.setShowArms(true);
         }
     }

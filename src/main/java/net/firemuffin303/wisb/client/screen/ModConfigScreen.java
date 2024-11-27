@@ -1,5 +1,6 @@
 package net.firemuffin303.wisb.client.screen;
 
+import com.terraformersmc.modmenu.util.mod.Mod;
 import net.firemuffin303.wisb.config.ModConfig;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -23,7 +24,13 @@ public class ModConfigScreen extends Screen {
         super.init();
 
         this.list = new OptionListWidget(this.client,this.width,this.height,32,this.height-50,25);
-        this.list.addAll(new SimpleOption[]{ModConfig.showWisbMobBucketTooltip,ModConfig.showWisbCrossbowBucketTooltip,ModConfig.showBeehiveTooltip,ModConfig.timeFormat,ModConfig.preciseCoordinate});
+        this.list.addAll(new SimpleOption[]{ModConfig.showWisbMobBucketTooltip,
+                ModConfig.showWisbCrossbowBucketTooltip,
+                ModConfig.showBeehiveTooltip,
+                ModConfig.timeFormat,
+                ModConfig.preciseCoordinate,
+                ModConfig.SNEAKING_TO_RENAME_NAME_TAG
+        });
         this.addSelectableChild(this.list);
         this.addDrawableChild(ButtonWidget.builder(ScreenTexts.DONE,button -> {
             ModConfig.save();
