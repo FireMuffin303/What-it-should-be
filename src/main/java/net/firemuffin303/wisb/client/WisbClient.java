@@ -22,12 +22,12 @@ import net.minecraft.client.item.TooltipData;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.JsonHelper;
 import net.minecraft.util.TypedActionResult;
 
 public class WisbClient implements ClientModInitializer {
 
     public static final Gson GSON = (new GsonBuilder()).setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
-
 
     @Override
     public void onInitializeClient() {

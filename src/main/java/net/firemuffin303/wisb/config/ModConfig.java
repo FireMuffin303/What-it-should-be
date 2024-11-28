@@ -1,7 +1,9 @@
 package net.firemuffin303.wisb.config;
 
+import com.google.common.collect.Lists;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 import net.fabricmc.loader.api.FabricLoader;
@@ -10,14 +12,21 @@ import net.firemuffin303.wisb.client.WisbClient;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.text.Text;
 import net.minecraft.util.TranslatableOption;
+import net.minecraft.util.function.ValueLists;
 import net.minecraft.util.math.MathHelper;
 
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.IntFunction;
 
 public class ModConfig{
     private static File file;
+
+    private static final List<ModOption<?>> MOD_OPTION_LIST = Lists.newArrayList();
+
+    public static final ModOption<Boolean> booleanModOption = registerConfig(new ModOption<>("wisb.option.test","test",true,"tooltiptest"));
+    public static final ModOption<TimeFormat> TIME_FORMAT_OPTION = registerConfig(new ModOption<>("wisb.option.test","test",TimeFormat.FULL_FORMAT,"tooltiptest"));
 
     public static final SimpleOption<Boolean> showWisbMobBucketTooltip = SimpleOption.ofBoolean("wisb.options.showMobBucketTooltip",
             SimpleOption.constantTooltip(Text.translatable("wisb.options.showMobBucketTooltip.desc")),true);
@@ -64,6 +73,11 @@ public class ModConfig{
         return SNEAKING_TO_RENAME_NAME_TAG.getValue();
     }
 
+    private static  <T> ModOption<T> registerConfig(ModOption<T> modOption){
+        MOD_OPTION_LIST.add(modOption);
+        return modOption;
+    }
+
     public static <T extends Serializable> void load(){
         if(file == null){
             file = new File(FabricLoader.getInstance().getConfigDir().toFile(),"wisb.json");
@@ -76,8 +90,11 @@ public class ModConfig{
 
             if(file.exists()){
                 BufferedReader br = new BufferedReader(new FileReader(file));
-                JsonObject jsonObject = JsonParser.parseReader(br).getAsJsonObject();
+                JsonObject jsonObject = new JsonParser().parse(br).getAsJsonObject();
 
+                MOD_OPTION_LIST.forEach(modOption -> {
+                    modOption.load(jsonObject);
+                });
 
                 showWisbMobBucketTooltip.setValue(jsonObject.getAsJsonPrimitive("showMobBucketTooltip").getAsBoolean());
                 showWisbCrossbowBucketTooltip.setValue(jsonObject.getAsJsonPrimitive("showCrossbowBucketTooltip").getAsBoolean());
@@ -85,6 +102,7 @@ public class ModConfig{
                 timeFormat.setValue(TimeFormat.byId(jsonObject.getAsJsonPrimitive("clockGUI_timeformat").getAsInt()));
                 preciseCoordinate.setValue(jsonObject.getAsJsonPrimitive("compassPreciseCoordinate").getAsBoolean());
                 SNEAKING_TO_RENAME_NAME_TAG.setValue(jsonObject.getAsJsonPrimitive("sneakToRenameNameTag").getAsBoolean());
+                TOOL_ITEM_DISPLAY.setValue(ItemGUIDisplay.byId(jsonObject.getAsJsonPrimitive("toolItemDisplay").getAsInt()));
 
 
             }
@@ -97,12 +115,14 @@ public class ModConfig{
 
     }
 
-    public static void save(){
+    public static <T> void save(){
         if(file == null){
             file = new File(FabricLoader.getInstance().getConfigDir().toFile(),"wisb.json");
         }
 
         JsonObject jsonObject = new JsonObject();
+
+        MOD_OPTION_LIST.forEach(ModOption::save);
 
         jsonObject.addProperty("showMobBucketTooltip",showWisbMobBucketTooltip.getValue());
         jsonObject.addProperty("showCrossbowBucketTooltip",showWisbCrossbowBucketTooltip.getValue());
@@ -110,6 +130,7 @@ public class ModConfig{
         jsonObject.addProperty("clockGUI_timeformat",timeFormat.getValue().getId());
         jsonObject.addProperty("compassPreciseCoordinate",preciseCoordinate.getValue());
         jsonObject.addProperty("sneakToRenameNameTag",SNEAKING_TO_RENAME_NAME_TAG.getValue());
+        jsonObject.addProperty("toolItemDisplay",TOOL_ITEM_DISPLAY.getValue().getId());
 
 
         String jsonString =  WisbClient.GSON.toJson(jsonObject);
@@ -136,6 +157,7 @@ public class ModConfig{
         FULL_FORMAT(0,"wisb.options.time.full_format"),
         TWELVE_FORMAT(1,"wisb.options.time.twelve_format");
 
+        static final IntFunction<TimeFormat> BY_ID = ValueLists.createIdToValueFunction(TimeFormat::getId,values(), ValueLists.OutOfBoundsHandling.WRAP);
         int id;
         String translationKey;
 
@@ -154,11 +176,13 @@ public class ModConfig{
             return this.translationKey;
         }
 
+
         public static TimeFormat byId(int id){
             List<TimeFormat> timeFormats = List.of(values());
             int i = MathHelper.clamp(id,0,timeFormats.size()-1);
             return timeFormats.get(i);
         }
+
     }
 
     public enum ItemGUIDisplay implements TranslatableOption{
