@@ -17,9 +17,7 @@ import net.minecraft.item.map.MapIcon;
 import net.minecraft.item.map.MapState;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
-import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
-import net.minecraft.util.Clearable;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.GlobalPos;
@@ -32,32 +30,41 @@ public class ModHudRender {
     private static final Identifier COMPASS_HUD = Wisb.modId("textures/gui/compass_bar.png");
     private static final Identifier MAP_ICONS_TEXTURE = new Identifier("textures/map/map_icons.png");
 
+    public static boolean isRenderBannerName = false;
+    public static boolean isRendering = false;
+
     public static void init(DrawContext drawContext,float delta){
+        isRendering = false;
+        boolean isDown = ModConfig.TOOL_ITEM_DISPLAY.getValue() == ModConfig.ItemGUIDisplay.DOWN;
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         Objects.requireNonNull(minecraftClient.player);
         Objects.requireNonNull(minecraftClient.world);
         ClientWorld clientWorld = minecraftClient.world;
         if(shouldRender(minecraftClient)){
             if(minecraftClient.player.isHolding(Items.COMPASS) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.COMPASS) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().compassGUI){
-                compassHUD(drawContext,delta,minecraftClient);
+                compassHUD(drawContext,delta,minecraftClient,isDown);
+                isRendering = true;
             }
 
             if(minecraftClient.player.isHolding(Items.CLOCK) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.CLOCK) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().clockGUI){
-                clockHUD(drawContext,delta,minecraftClient);
+                clockHUD(drawContext,delta,minecraftClient,isDown);
+                isRendering = true;
             }
 
             if(minecraftClient.player.isHolding(Items.RECOVERY_COMPASS) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.RECOVERY_COMPASS) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().compassGUI){
-                recoveryCompassHUD(drawContext,delta,minecraftClient);
+                recoveryCompassHUD(drawContext,delta,minecraftClient,isDown);
+                isRendering = true;
             }
         }
 
 
     }
 
-    public static void compassHUD(DrawContext drawContext, float delta, MinecraftClient minecraftClient){
+    public static void compassHUD(DrawContext drawContext, float delta, MinecraftClient minecraftClient,boolean isDown){
         Objects.requireNonNull(minecraftClient.player);
         Objects.requireNonNull(minecraftClient.world);
         ClientPlayerEntity clientPlayerEntity = minecraftClient.player;
+
 
         TextRenderer textRenderer = minecraftClient.textRenderer;
         ClientWorld world = minecraftClient.world;
@@ -70,20 +77,20 @@ public class ModHudRender {
         double bodyYaw = getBodyYaw(clientPlayerEntity);
 
         drawContext.setShaderColor(1.0f,1.0f,1.0f,0.95f);
-        drawContext.drawTexture(COMPASS_HUD,x-(182/2),3,0,0,182,5);
+        drawContext.drawTexture(COMPASS_HUD,x-(182/2), isDown ? drawContext.getScaledWindowHeight() - 45 : 3,0,0,182,5);
         drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
 
-        int north = (int)  ((drawContext.getScaledWindowWidth()*bodyYaw) *-1) + drawContext.getScaledWindowWidth();
+        int north = (int)  (((drawContext.getScaledWindowWidth()*bodyYaw) *-1) + drawContext.getScaledWindowWidth()) - 2;
 
-        drawContext.enableScissor(x-(182/2),0,x+(182/2),19);
-        drawContext.drawText(textRenderer, Text.of("N"),north,2,0xFFFFFF,true);
-        drawContext.drawText(textRenderer, Text.of("E"),(north+x/2),2,0xFFFFFF,true);
-        drawContext.drawText(textRenderer, Text.of("W"),(north-x/2),2,0xFFFFFF,true);
-        drawContext.drawText(textRenderer, Text.of("S"),(north+x),2,0xFFFFFF,true);
-        drawContext.drawText(textRenderer, Text.of("S"),(north-x),2,0xFFFFFF,true);
+        drawContext.enableScissor(x-(182/2), isDown ? drawContext.getScaledWindowHeight() - 58 : 0,x+(182/2), isDown ? (drawContext.getScaledWindowHeight() - 50) + 19 : 19);
+        drawContext.drawText(textRenderer, Text.of("N"),north, isDown ? drawContext.getScaledWindowHeight() - 46 : 2,0xFFFFFF,true);
+        drawContext.drawText(textRenderer, Text.of("E"),(north+x/2), isDown ? drawContext.getScaledWindowHeight() - 46 : 2,0xFFFFFF,true);
+        drawContext.drawText(textRenderer, Text.of("W"),(north-x/2), isDown ? drawContext.getScaledWindowHeight() - 46 : 2,0xFFFFFF,true);
+        drawContext.drawText(textRenderer, Text.of("S"),(north+x), isDown ? drawContext.getScaledWindowHeight() - 46 : 2,0xFFFFFF,true);
+        drawContext.drawText(textRenderer, Text.of("S"),(north-x), isDown ? drawContext.getScaledWindowHeight() - 46 : 2,0xFFFFFF,true);
 
         drawContext.setShaderColor(1f,1.0f,1.0f,0.5f);
-        drawContext.drawTexture(COMPASS_HUD,x-1,2,8,10,8,8);
+        drawContext.drawTexture(COMPASS_HUD,x-4,2,8,10,8,8);
         drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
 
         //Target Pointer
@@ -92,13 +99,13 @@ public class ModHudRender {
             double angleMarker = ModHudRender.calculateMarker(clientPlayerEntity,drawContext.getScaledWindowWidth(),bodyYaw,vec3d);
 
             drawContext.setShaderColor(1f,0.5f,0.5f,1.0f);
-            drawContext.drawTexture(COMPASS_HUD,(int)angleMarker-2,2,0,10,8,8);
+            drawContext.drawTexture(COMPASS_HUD,(int)angleMarker-2,isDown ? drawContext.getScaledWindowHeight() - 46 : 2,0,10,8,8);
             drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
         }
 
-        int coordY = 12;
-        if(ModHudRender.renderMap(textRenderer,world,clientPlayerEntity,drawContext,bodyYaw)){
-            coordY = 20;
+        int coordY = isDown ? drawContext.getScaledWindowHeight() - 58 : 12;
+        if(ModHudRender.renderMap(textRenderer,world,clientPlayerEntity,drawContext,bodyYaw,isDown)){
+            coordY = isDown ? drawContext.getScaledWindowHeight() - 70 : 20;
         }
         drawContext.disableScissor();
 
@@ -115,7 +122,7 @@ public class ModHudRender {
         drawContext.drawCenteredTextWithShadow(textRenderer,coord,x,coordY+2,0xFFFFFF);
     }
 
-    public static void clockHUD(DrawContext drawContext,float delta, MinecraftClient minecraftClient){
+    public static void clockHUD(DrawContext drawContext,float delta, MinecraftClient minecraftClient,boolean isDown){
         Objects.requireNonNull(minecraftClient.world);
         TextRenderer textRenderer = minecraftClient.textRenderer;
         int x = drawContext.getScaledWindowWidth() /2;
@@ -133,7 +140,7 @@ public class ModHudRender {
         drawContext.drawCenteredTextWithShadow(textRenderer, currentText ,x,3,0xFFFFFF);
     }
 
-    public static void recoveryCompassHUD(DrawContext drawContext,float delta,MinecraftClient minecraftClient){
+    public static void recoveryCompassHUD(DrawContext drawContext,float delta,MinecraftClient minecraftClient,boolean isDown){
         Objects.requireNonNull(minecraftClient.player);
         Objects.requireNonNull(minecraftClient.world);
 
@@ -190,8 +197,8 @@ public class ModHudRender {
         return ((MathHelper.floorMod (-angle + (bodyYaw-0.25f),1.0f) * screenWidth) * -1) + screenWidth;
     }
 
-    private static boolean renderMap(TextRenderer textRenderer,ClientWorld world,ClientPlayerEntity clientPlayerEntity,DrawContext drawContext,double bodyYaw){
-        boolean isRenderBannerName = false;
+    private static boolean renderMap(TextRenderer textRenderer,ClientWorld world,ClientPlayerEntity clientPlayerEntity,DrawContext drawContext,double bodyYaw,boolean isDown){
+        isRenderBannerName = false;
         if(clientPlayerEntity.isHolding(Items.FILLED_MAP)){
             ItemStack map = clientPlayerEntity.getStackInHand(Hand.MAIN_HAND).isOf(Items.FILLED_MAP) ? clientPlayerEntity.getStackInHand(Hand.MAIN_HAND) : clientPlayerEntity.getStackInHand(Hand.OFF_HAND);
             MapState mapState = FilledMapItem.getMapState(map,world);
@@ -217,17 +224,17 @@ public class ModHudRender {
                 int h = (b/16) * 8;
 
                 drawContext.setShaderColor(1f,1f,1f,1.0f);
-                drawContext.drawTexture(MAP_ICONS_TEXTURE,(int)mapDestinationAngle-8,1,g,h,8,8,128,128);
+                drawContext.drawTexture(MAP_ICONS_TEXTURE,(int)mapDestinationAngle-4,isDown ? drawContext.getScaledWindowHeight() - 46 : 1 ,g,h,8,8,128,128);
                 drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
 
                 if(bannerMarker.getName() != null){
                     double textAngle = (mapDestinationAngle -2f) - (textRenderer.getWidth(bannerMarker.getName())/2.0f);
 
                     int blockBorder = (textRenderer.getWidth(bannerMarker.getName())/2) + 2;
-                    drawContext.fill((int)(mapDestinationAngle-2f)-blockBorder,9,(int)(mapDestinationAngle-2f)+blockBorder,18,0x50000000);
+                    drawContext.fill((int)(mapDestinationAngle-2f)-blockBorder, isDown ? drawContext.getScaledWindowHeight() - 56 : 9,(int)(mapDestinationAngle-2f)+blockBorder, isDown ? (drawContext.getScaledWindowHeight() - 56) + 10 :18,0x50000000);
 
-                    drawContext.drawText(textRenderer,bannerMarker.getName(),(int)textAngle,10,0xFFFFFF,false);
-                    if(textAngle > ((drawContext.getScaledWindowWidth()/2f)-(182f/2f) - textRenderer.getWidth(bannerMarker.getName())) && textAngle < (drawContext.getScaledWindowWidth()/2f)+(182f/2f)){
+                    drawContext.drawText(textRenderer,bannerMarker.getName(),(int)textAngle, isDown ? drawContext.getScaledWindowHeight() - 54 : 10,0xFFFFFF,false);
+                    if(textAngle > ((drawContext.getScaledWindowWidth()/2f)-(182f/2f) - (textRenderer.getWidth(bannerMarker.getName()) - 40)) && textAngle < (drawContext.getScaledWindowWidth()/2f)+((182f/2f) -40)){
                         isRenderBannerName = true;
                     }
 
@@ -264,7 +271,7 @@ public class ModHudRender {
                         double mapDestinationAngle = ModHudRender.calculateMarker(clientPlayerEntity,drawContext.getScaledWindowWidth(),bodyYaw,destination);
 
                         drawContext.setShaderColor(1f,1f,1f,1.0f);
-                        drawContext.drawTexture(MAP_ICONS_TEXTURE,(int)mapDestinationAngle-8,1,g,h,8,8,128,128);
+                        drawContext.drawTexture(MAP_ICONS_TEXTURE,(int)mapDestinationAngle-8,isDown ? drawContext.getScaledWindowHeight() - 46 : 1,g,h,8,8,128,128);
                         drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
                     }
                 }

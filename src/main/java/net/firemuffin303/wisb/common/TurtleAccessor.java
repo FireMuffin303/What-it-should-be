@@ -5,7 +5,9 @@ import net.minecraft.sound.SoundCategory;
 public interface TurtleAccessor {
     void setCover(boolean value);
 
-    boolean easierTurtleScute$getCover();
+    int getCoverTime();
+
+    boolean easierTurtleScute$isCovered();
 
     void brushing(SoundCategory category);
 }

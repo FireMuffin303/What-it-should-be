@@ -23,6 +23,7 @@
   "client": [
     "BossBarHudAccessor",
     "ClientWorldComponentMixin",
+    "InGameHudMixin",
     "turtle.TurtleEntityRendererMixin"
   ],
   "injectors": {

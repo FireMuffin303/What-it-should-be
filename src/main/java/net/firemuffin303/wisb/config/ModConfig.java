@@ -85,6 +85,7 @@ public class ModConfig{
                 timeFormat.setValue(TimeFormat.byId(jsonObject.getAsJsonPrimitive("clockGUI_timeformat").getAsInt()));
                 preciseCoordinate.setValue(jsonObject.getAsJsonPrimitive("compassPreciseCoordinate").getAsBoolean());
                 SNEAKING_TO_RENAME_NAME_TAG.setValue(jsonObject.getAsJsonPrimitive("sneakToRenameNameTag").getAsBoolean());
+                TOOL_ITEM_DISPLAY.setValue(ItemGUIDisplay.byId(jsonObject.getAsJsonPrimitive("toolItemDisplay").getAsInt()));
 
 
             }
@@ -110,6 +111,7 @@ public class ModConfig{
         jsonObject.addProperty("clockGUI_timeformat",timeFormat.getValue().getId());
         jsonObject.addProperty("compassPreciseCoordinate",preciseCoordinate.getValue());
         jsonObject.addProperty("sneakToRenameNameTag",SNEAKING_TO_RENAME_NAME_TAG.getValue());
+        jsonObject.addProperty("toolItemDisplay",TOOL_ITEM_DISPLAY.getValue().getId());
 
 
         String jsonString =  WisbClient.GSON.toJson(jsonObject);

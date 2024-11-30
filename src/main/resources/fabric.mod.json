@@ -25,6 +25,9 @@
     ],
     "modmenu": [
       "net.firemuffin303.wisb.integration.ModMenuConfig"
+    ],
+    "jade": [
+      "net.firemuffin303.wisb.integration.ModJadePlugin"
     ]
   },
   "mixins": [

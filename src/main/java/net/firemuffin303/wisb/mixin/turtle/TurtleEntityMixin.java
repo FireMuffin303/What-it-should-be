@@ -153,6 +153,12 @@ public abstract class TurtleEntityMixin extends AnimalEntity implements TurtleAc
     }
 
     @Unique
+    @Override
+    public int getCoverTime() {
+        return this.coverTimer;
+    }
+
+    @Unique
     public boolean isWaxed(){
         return this.dataTracker.get(IS_WAXED);
     }
@@ -179,7 +185,7 @@ public abstract class TurtleEntityMixin extends AnimalEntity implements TurtleAc
 
     @Unique
     @Override
-    public boolean easierTurtleScute$getCover() {
+    public boolean easierTurtleScute$isCovered() {
         return this.isCovered();
     }
 

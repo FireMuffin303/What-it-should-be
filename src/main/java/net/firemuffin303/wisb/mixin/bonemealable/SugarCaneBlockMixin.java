@@ -77,6 +77,11 @@ public abstract class SugarCaneBlockMixin extends Block implements Fertilizable 
     @Override
     public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
         BlockPos airPos = pos;
+        //I add random in here because I playtest and found out it totally busted. so I need to nerf it down.
+        if(random.nextInt(3) != 0){
+            return;
+        }
+
         do{
             airPos = airPos.up();
         }while(world.getBlockState(airPos).isOf(Blocks.SUGAR_CANE));

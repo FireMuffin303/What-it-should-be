@@ -32,6 +32,10 @@ public class ModLangProvider extends FabricLanguageProvider {
         translationBuilder.add("wisb.options.time.full_format","24 Hour");
         translationBuilder.add("wisb.options.time.twelve_format","12 Hour");
         translationBuilder.add("wisb.options.sneakingToRenameNameTag","Sneak To Rename Name Tag");
+        translationBuilder.add("wisb.options.toolItemDisplay","Tool Item Display");
+        translationBuilder.add("wisb.options.toolItemDisplay.desc","Change how items special GUI show such as Compass, Clocks and Recovery Compass");
+        translationBuilder.add("wisb.option.itemGuiDisplay.up","Up");
+        translationBuilder.add("wisb.option.itemGuiDisplay.down","Down");
 
         //Rename Name Tag
         translationBuilder.add("wisb.renameNameTag.title","Rename Name Tag");
@@ -42,7 +46,7 @@ public class ModLangProvider extends FabricLanguageProvider {
         translationBuilder.add("gamerule.wisb:bonemealableNetherwart","Nether Wart can be bonemeal");
         translationBuilder.add("gamerule.wisb:bonemealableLilyPad","Lily Pad can be bonemeal");
         translationBuilder.add("gamerule.wisb:easierBabyZombie","Easier Baby zombie");
-        translationBuilder.add("gamerule.wisb:creaperExplosionDestroyBlock","Creeper Explosion Destroy Blocks");
+        translationBuilder.add("gamerule.wisb:creeperExplosionDestroyBlock","Creeper Explosion Destroy Blocks");
         translationBuilder.add("gamerule.wisb:spawnArmorStandWithArm","Spawn Armor Stand with arms");
         translationBuilder.add("gamerule.wisb:shearAbleItemFrame","Shearable Item Frame");
         translationBuilder.add("gamerule.wisb:showCompassGUI","Show Compass GUI");
@@ -57,6 +61,15 @@ public class ModLangProvider extends FabricLanguageProvider {
         //JEI
         translationBuilder.add("wisb.jei.mobbrush.title","Wisb's Mob Brushing");
         translationBuilder.add("wisb.jei.mobbrush.turtle","Turtles swim for a while, then get barnacle on their back. Use brush to clean them off.");
+
+        //Jade
+        translationBuilder.add("jade.wisb.turtle.barnacle.tooltip","Next Barnacle : %s");
+        translationBuilder.add("config.jade.plugin_wisb.item_tool_display_pos_x","Item Tool Display Pos X");
+        translationBuilder.add("config.jade.plugin_wisb.item_tool_display_pos_y","Item Tool Display Pos Y");
+        translationBuilder.add("config.jade.plugin_wisb.hud_render_side","Item Tool Display Side");
+        translationBuilder.add("config.jade.plugin_wisb.hud_render_side_left","Left");
+        translationBuilder.add("config.jade.plugin_wisb.hud_render_side_right","Right");
+        translationBuilder.add("config.jade.plugin_wisb.turtle_barnacle","Turtle Barnacle");
     }
 
     public static class ThaiLangProvider  extends FabricLanguageProvider {
@@ -72,7 +85,9 @@ public class ModLangProvider extends FabricLanguageProvider {
             translationBuilder.add("wisb.clock.playtime","เวลาเล่น : %s");
             translationBuilder.add("wisb.beehive.tooltip.honey_level","%s / %s");
             translationBuilder.add("wisb.axolotl_bucket.tooltip.variant","ลาย : %s");
+
             // Options
+            translationBuilder.add("wisb.config.title","การตั้งค่า What It Should Be");
             translationBuilder.add("wisb.options.showMobBucketTooltip","แสดงรายละเอียดสัตว์ในถัง");
             translationBuilder.add("wisb.options.showMobBucketTooltip.desc","แสดงเลือดและลายสีของสัตว์ในถัง");
             translationBuilder.add("wisb.options.showCrossbowTooltip","แสดงรายละเอียดหน้าไม้");
@@ -87,18 +102,45 @@ public class ModLangProvider extends FabricLanguageProvider {
             translationBuilder.add("wisb.options.time.full_format","24 ชั่วโมง");
             translationBuilder.add("wisb.options.time.twelve_format","12 ชั่วโมง");
 
+            translationBuilder.add("wisb.options.sneakingToRenameNameTag","ย่องเพื่อเปลี่ยนชื่อของป้ายชื่อ");
+            translationBuilder.add("wisb.options.toolItemDisplay","การแสดงหน้าต่างไอเทม");
+            translationBuilder.add("wisb.options.toolItemDisplay.desc","เปลี่ยนหน้าต่างไอเทมพิเศษอย่างเข็มทิศ นาฬิกาและเข็มทิศหวนคืน");
+            translationBuilder.add("wisb.option.itemGuiDisplay.up","บน");
+            translationBuilder.add("wisb.option.itemGuiDisplay.down","ล่าง");
+
             // Game Rule
             translationBuilder.add("gamerule.wisb:sugarCaneGrowHeight","ระดับความสูงของต้นอ้อย");
             translationBuilder.add("gamerule.wisb:bonemealableSugarCane","ใช้ผงกระดูกกับต้นอ้อย");
             translationBuilder.add("gamerule.wisb:bonemealableNetherwart","ใช้ผงกระดูกกับหูดเนเธอร์");
             translationBuilder.add("gamerule.wisb:bonemealableLilyPad","ใช้ผงกระดูกกับใบบัว");
             translationBuilder.add("gamerule.wisb:easierBabyZombie","ซอมบี้เด็กง่ายกว่าเดิม");
-            translationBuilder.add("gamerule.wisb:creaperExplosionDestroyBlock","ระเบิดครีปเปอร์ทำลายบล๊อค");
+            translationBuilder.add("gamerule.wisb:creeperExplosionDestroyBlock","ระเบิดครีปเปอร์ทำลายบล๊อค");
             translationBuilder.add("gamerule.wisb:spawnArmorStandWithArm","หุ่นโชว์ของมีแขน");
             translationBuilder.add("gamerule.wisb:shearAbleItemFrame","ตัดแผ่นโชว์ไอเทม");
             translationBuilder.add("gamerule.wisb:showCompassGUI","แสดงหน้าต่างเข็มทิศ");
             translationBuilder.add("gamerule.wisb:showTreasureInCompassGUI","แสดงสมบัติบนหน้าเข็มทิศ");
             translationBuilder.add("gamerule.wisb:showClockGUI","แสดงหน้าต่างนาฬิกา");
+
+            //Rename Name Tag
+            translationBuilder.add("wisb.renameNameTag.title","เปลี่ยนชื่อของป้ายชื่อ");
+
+            //ModMenu
+            translationBuilder.add("modmenu.descriptionTranslation.wisb","ม๊อดไมน์คราฟที่จะปรับระดับของ Vanilla ให้เป็นในแบบที่ควรจะเป็น...ตามที่ FireMuffin303 คิดอ่ะนะ. ระบบส่วนใหญ่จะสามารถตั้งค่าได้จากหน้าต่างและ Game Rules. เพราะฉนั้นสามารถปรับได้ตามต้องการเลย!");
+            translationBuilder.add("modmenu.nameTranslation.wisb","What It Should Be");
+            translationBuilder.add("modmenu.summaryTranslation.wisb","ปรับไมน์คราฟให้เป็นในแบบที่ควรเป็น.");
+
+            //JEI
+            translationBuilder.add("wisb.jei.mobbrush.title","Wisb's ปัดแปรงสัตว์");
+            translationBuilder.add("wisb.jei.mobbrush.turtle","Turtles swim for a while, then get barnacle on their back. Use brush to clean them off.");
+
+            //Jade
+            translationBuilder.add("jade.wisb.turtle.barnacle.tooltip","เพรียงทะเล : %s");
+            translationBuilder.add("config.jade.plugin_wisb.item_tool_display_pos_x","ตำแหน่งแกน X ป้ายรายละเอียด");
+            translationBuilder.add("config.jade.plugin_wisb.item_tool_display_pos_y","ตำแหน่งแกน Y ป้ายรายละเอียด");
+            translationBuilder.add("config.jade.plugin_wisb.hud_render_side","ฝั่งแสดงป้ายรายละเอียด");
+            translationBuilder.add("config.jade.plugin_wisb.hud_render_side_left","ซ้าย");
+            translationBuilder.add("config.jade.plugin_wisb.hud_render_side_right","ขวา");
+            translationBuilder.add("config.jade.plugin_wisb.turtle_barnacle","แสดงเวลาเพรียงทะเล");
         }
     }
 }

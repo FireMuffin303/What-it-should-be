@@ -67,6 +67,7 @@ dependencies {
 
 
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+    modImplementation "maven.modrinth:jade:${project.jade_version}"
 
 }
 

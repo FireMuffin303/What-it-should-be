@@ -23,7 +23,7 @@ public class TurtleBarnacleFeatureRenderer<T extends TurtleEntity,M extends Turt
 
     @Override
     public void render(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
-        if(((TurtleAccessor)entity).easierTurtleScute$getCover() && !entity.isInvisible()){
+        if(((TurtleAccessor)entity).easierTurtleScute$isCovered() && !entity.isInvisible()){
             this.model.animateModel(entity, limbAngle, limbDistance, tickDelta);
             this.model.setAngles(entity, limbAngle, limbDistance, animationProgress, headYaw, headPitch);
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(RenderLayer.getEntityCutoutNoCull(this.texture));

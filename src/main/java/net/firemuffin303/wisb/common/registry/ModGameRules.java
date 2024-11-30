@@ -16,7 +16,7 @@ public class ModGameRules {
     public static final GameRules.Key<GameRules.BooleanRule> BONEMEALABLE_NETHERWART = GameRuleRegistry.register(MOD_ID+":bonemealableNetherwart", GameRules.Category.MISC,GameRuleFactory.createBooleanRule(false, (server, booleanRule) -> gameRulePacket(server)));
     public static final GameRules.Key<GameRules.BooleanRule> BONEMEALABLE_LILLYPAD = GameRuleRegistry.register(MOD_ID+":bonemealableLilyPad", GameRules.Category.MISC,GameRuleFactory.createBooleanRule(false, (server, booleanRule) -> gameRulePacket(server)));
     public static final GameRules.Key<GameRules.BooleanRule> EASIER_BABY_ZOMBIE = GameRuleRegistry.register(MOD_ID+":easierBabyZombie", GameRules.Category.MOBS,GameRuleFactory.createBooleanRule(true,(server, booleanRule) -> gameRulePacket(server)));
-    public static final GameRules.Key<GameRules.BooleanRule> CREEPER_EXPLOSION_DESTROY_BLOCK = GameRuleRegistry.register(MOD_ID+":creaperExplosionDestroyBlock",GameRules.Category.MOBS,GameRuleFactory.createBooleanRule(true));
+    public static final GameRules.Key<GameRules.BooleanRule> CREEPER_EXPLOSION_DESTROY_BLOCK = GameRuleRegistry.register(MOD_ID+":creeperExplosionDestroyBlock",GameRules.Category.MOBS,GameRuleFactory.createBooleanRule(true));
     public static final GameRules.Key<GameRules.BooleanRule> SPAWN_ARMOR_STAND_WITH_ARMS = GameRuleRegistry.register(MOD_ID+":spawnArmorStandWithArm", GameRules.Category.SPAWNING,GameRuleFactory.createBooleanRule(true));
     public static final GameRules.Key<GameRules.BooleanRule> SHEARABLE_ITEM_FRAME = GameRuleRegistry.register(MOD_ID+":shearAbleItemFrame", GameRules.Category.MISC,GameRuleFactory.createBooleanRule(true));
 
