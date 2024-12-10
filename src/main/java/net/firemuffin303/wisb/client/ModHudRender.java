@@ -1,5 +1,6 @@
 package net.firemuffin303.wisb.client;
 
+import dev.emi.trinkets.api.SlotReference;
 import dev.emi.trinkets.api.TrinketComponent;
 import dev.emi.trinkets.api.TrinketsApi;
 import net.firemuffin303.wisb.Wisb;
@@ -20,6 +21,7 @@ import net.minecraft.nbt.NbtList;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Pair;
 import net.minecraft.util.math.GlobalPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
@@ -31,10 +33,12 @@ public class ModHudRender {
     private static final Identifier MAP_ICONS_TEXTURE = new Identifier("textures/map/map_icons.png");
 
     public static boolean isRenderBannerName = false;
+    private static boolean isRenderCompass = false;
     public static boolean isRendering = false;
 
     public static void init(DrawContext drawContext,float delta){
         isRendering = false;
+        isRenderCompass = false;
         boolean isDown = ModConfig.TOOL_ITEM_DISPLAY.getValue() == ModConfig.ItemGUIDisplay.DOWN;
         MinecraftClient minecraftClient = MinecraftClient.getInstance();
         Objects.requireNonNull(minecraftClient.player);
@@ -44,6 +48,7 @@ public class ModHudRender {
             if(minecraftClient.player.isHolding(Items.COMPASS) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.COMPASS) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().compassGUI){
                 compassHUD(drawContext,delta,minecraftClient,isDown);
                 isRendering = true;
+                isRenderCompass = true;
             }
 
             if(minecraftClient.player.isHolding(Items.CLOCK) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.CLOCK) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().clockGUI){
@@ -54,6 +59,7 @@ public class ModHudRender {
             if(minecraftClient.player.isHolding(Items.RECOVERY_COMPASS) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.RECOVERY_COMPASS) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().compassGUI){
                 recoveryCompassHUD(drawContext,delta,minecraftClient,isDown);
                 isRendering = true;
+                isRenderCompass = true;
             }
         }
 
@@ -73,6 +79,17 @@ public class ModHudRender {
         int x = drawContext.getScaledWindowWidth() /2;
 
         ItemStack compass = clientPlayerEntity.getStackInHand(isHoldingOffhand ? Hand.OFF_HAND : Hand.MAIN_HAND);
+        if(Wisb.isTrinketsInstall){
+            Optional<TrinketComponent> trinketComponent = TrinketsApi.getTrinketComponent(minecraftClient.player);
+            if(trinketComponent.isPresent()){
+                List<Pair<SlotReference, ItemStack>> items =  trinketComponent.get().getEquipped(Items.COMPASS);
+                if(!items.isEmpty()){
+                    compass =  items.get(0).getRight();
+                }
+            }
+
+        }
+
         GlobalPos target = CompassItem.hasLodestone(compass) ? CompassItem.createLodestonePos(compass.getOrCreateNbt()) : CompassItem.createSpawnPos(world);
         double bodyYaw = getBodyYaw(clientPlayerEntity);
 
@@ -135,9 +152,10 @@ public class ModHudRender {
         Text currentText = ModConfig.timeFormat.getValue() == ModConfig.TimeFormat.FULL_FORMAT ? fullFormat : AMPM;
 
         int xPadding = (textRenderer.getWidth(currentText) /2) +5;
-        drawContext.fill(x-xPadding,1,x+xPadding,12,0x50000000);
+        int yMargin = isRenderCompass ? isRenderBannerName ? 33 : 26 : 1;
+        drawContext.fill(x-xPadding,yMargin,x+xPadding,11 + yMargin,0x50000000);
 
-        drawContext.drawCenteredTextWithShadow(textRenderer, currentText ,x,3,0xFFFFFF);
+        drawContext.drawCenteredTextWithShadow(textRenderer, currentText ,x,2 + yMargin,0xFFFFFF);
     }
 
     public static void recoveryCompassHUD(DrawContext drawContext,float delta,MinecraftClient minecraftClient,boolean isDown){

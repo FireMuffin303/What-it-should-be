@@ -25,8 +25,8 @@ public class ModGameRules {
     public static final GameRules.Key<GameRules.BooleanRule> CLOCK_GUI = GameRuleRegistry.register(MOD_ID+":showClockGUI", GameRules.Category.PLAYER,GameRuleFactory.createBooleanRule(true,(server, booleanRule) -> gameRulePacket(server)));
     public static final GameRules.Key<GameRules.IntRule> RENAME_NAMETAG_COST = GameRuleRegistry.register(MOD_ID+":renameNameTagCost", GameRules.Category.PLAYER,GameRuleFactory.createIntRule(1,(server, booleanRule) -> gameRulePacket(server)));
     public static final GameRules.Key<GameRules.BooleanRule> TURTLE_HAS_BARNACLE = GameRuleRegistry.register(MOD_ID+":turtleHasBarnacle", GameRules.Category.MOBS,GameRuleFactory.createBooleanRule(true));
-    public static final GameRules.Key<GameRules.IntRule> TURTLE_BARNACLE_MIN_TIME = GameRuleRegistry.register(MOD_ID+":turtleBarnacleMinTime", GameRules.Category.MOBS,GameRuleFactory.createIntRule(4800,1));
-    public static final GameRules.Key<GameRules.IntRule> TURTLE_BARNACLE_MAX_TIME = GameRuleRegistry.register(MOD_ID+":turtleBarnacleMaxTime", GameRules.Category.MOBS,GameRuleFactory.createIntRule(12000,1));
+    public static final GameRules.Key<GameRules.IntRule> TURTLE_BARNACLE_MIN_TIME = GameRuleRegistry.register(MOD_ID+":turtleBarnacleMinTime", GameRules.Category.MOBS,GameRuleFactory.createIntRule(18000,1));
+    public static final GameRules.Key<GameRules.IntRule> TURTLE_BARNACLE_MAX_TIME = GameRuleRegistry.register(MOD_ID+":turtleBarnacleMaxTime", GameRules.Category.MOBS,GameRuleFactory.createIntRule(26400,1));
 
     public static void init(){}
 
