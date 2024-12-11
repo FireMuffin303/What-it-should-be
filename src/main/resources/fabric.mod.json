@@ -6,7 +6,7 @@
   "description": "",
   "authors": ["FireMuffin303"],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/muffins-slime-golem",
+    "homepage": "https://modrinth.com/mod/wisb",
     "sources": "https://github.com/FireMuffin303/What-it-should-be",
     "issues": "https://github.com/FireMuffin303/What-it-should-be/issues"
   },
@@ -37,5 +37,6 @@
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
-  }
+  },
+  "accessWidener": "wisb.accesswidener"
 }
