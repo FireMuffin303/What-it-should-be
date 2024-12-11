@@ -45,18 +45,18 @@ public class ModHudRender {
         Objects.requireNonNull(minecraftClient.world);
         ClientWorld clientWorld = minecraftClient.world;
         if(shouldRender(minecraftClient)){
-            if(minecraftClient.player.isHolding(Items.COMPASS) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.COMPASS) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().compassGUI){
+            if((minecraftClient.player.isHolding(Items.COMPASS) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.COMPASS)) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().compassGUI){
                 compassHUD(drawContext,delta,minecraftClient,isDown);
                 isRendering = true;
                 isRenderCompass = true;
             }
 
-            if(minecraftClient.player.isHolding(Items.CLOCK) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.CLOCK) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().clockGUI){
+            if((minecraftClient.player.isHolding(Items.CLOCK) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.CLOCK)) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().clockGUI){
                 clockHUD(drawContext,delta,minecraftClient,isDown);
                 isRendering = true;
             }
 
-            if(minecraftClient.player.isHolding(Items.RECOVERY_COMPASS) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.RECOVERY_COMPASS) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().compassGUI){
+            if((minecraftClient.player.isHolding(Items.RECOVERY_COMPASS) || ModHudRender.isTrinketEquipped(minecraftClient.player,Items.RECOVERY_COMPASS)) && ((WisbWorldComponent.WisbWorldComponentAccessor)clientWorld).wisb$getWisbWorldComponent().compassGUI){
                 recoveryCompassHUD(drawContext,delta,minecraftClient,isDown);
                 isRendering = true;
                 isRenderCompass = true;
