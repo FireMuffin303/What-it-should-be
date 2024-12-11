@@ -19,13 +19,7 @@ But does nothing harmful at all, rather than just save and load variable from In
 Few days passed, My friend still got the warning. I can't access to VirusTotal for some reason. I decided to make a Youtube Short about the situation to request some help. (I should have ask Official Modding Discord, I know.)
 
 <div align="center">
-    <iframe 
-        src="https://www.youtube.com/embed/JF05skKBEvo"
-        width="315" height="560"
-        frameborder="0"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    >
-    </iframe>
+    <a href="https://www.youtube.com/watch?v=JF05skKBEvo">The Youtube Short</a>
 
 (1 Dec 2024 12:00 GMT+7)
 </div>
@@ -33,11 +27,7 @@ Few days passed, My friend still got the warning. I can't access to VirusTotal f
 Lots of people tried to help, and I do appreciate everyone who tried to help. But few hours later my friends who got the warning try to download again and completely normal.
 
 <div align="center">
-    <iframe 
-        src="https://www.youtube.com/embed/wdof9ZYmTlQ"
-        frameborder="0"
-    >
-    </iframe>
+    <a href="https://www.youtube.com/watch?v=wdof9ZYmTlQ">Video of the situation</a>
 
 (1 Dec 2024 20:35 GMT+7)
 </div>
