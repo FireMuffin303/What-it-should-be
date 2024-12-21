@@ -28,6 +28,7 @@ public class WisbClient implements ClientModInitializer {
 
     public static final Gson GSON = (new GsonBuilder()).setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).setPrettyPrinting().create();
 
+    public static float spyGlassZoomScale = 0.1f;
 
     @Override
     public void onInitializeClient() {
