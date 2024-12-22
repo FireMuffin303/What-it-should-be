@@ -20,7 +20,8 @@ public abstract class MouseMixin {
     @WrapOperation(method = "onMouseScroll",at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;scrollInHotbar(D)V"))
     public void wisb$adjustingSpyglassZoom(PlayerInventory instance, double scrollAmount, Operation<Void> original, @Local int i){
         if(this.client.player.isUsingSpyglass()){
-            WisbClient.spyGlassZoomScale =  MathHelper.clamp(WisbClient.spyGlassZoomScale + (-i * 0.1f),0.1f,0.8f);
+            float zoomScale = this.client.options.sprintKey.isPressed() ? 0.1f : 0.05f;
+            WisbClient.spyGlassZoomScale =  MathHelper.clamp(WisbClient.spyGlassZoomScale + (-i * zoomScale),0.1f,0.8f);
         }else{
             original.call(instance,scrollAmount);
         }
