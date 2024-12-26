@@ -78,16 +78,33 @@ public class ModConfig{
                 BufferedReader br = new BufferedReader(new FileReader(file));
                 JsonObject jsonObject = JsonParser.parseReader(br).getAsJsonObject();
 
+                if(jsonObject.getAsJsonPrimitive("showMobBucketTooltip") != null){
+                    showWisbMobBucketTooltip.setValue(jsonObject.getAsJsonPrimitive("showMobBucketTooltip").getAsBoolean());
+                }
 
-                showWisbMobBucketTooltip.setValue(jsonObject.getAsJsonPrimitive("showMobBucketTooltip").getAsBoolean());
-                showWisbCrossbowBucketTooltip.setValue(jsonObject.getAsJsonPrimitive("showCrossbowBucketTooltip").getAsBoolean());
-                showBeehiveTooltip.setValue(jsonObject.getAsJsonPrimitive("showBeehiveTooltip").getAsBoolean());
-                timeFormat.setValue(TimeFormat.byId(jsonObject.getAsJsonPrimitive("clockGUI_timeformat").getAsInt()));
-                preciseCoordinate.setValue(jsonObject.getAsJsonPrimitive("compassPreciseCoordinate").getAsBoolean());
-                SNEAKING_TO_RENAME_NAME_TAG.setValue(jsonObject.getAsJsonPrimitive("sneakToRenameNameTag").getAsBoolean());
-                TOOL_ITEM_DISPLAY.setValue(ItemGUIDisplay.byId(jsonObject.getAsJsonPrimitive("toolItemDisplay").getAsInt()));
+                if(jsonObject.getAsJsonPrimitive("showCrossbowBucketTooltip") != null){
+                    showWisbCrossbowBucketTooltip.setValue(jsonObject.getAsJsonPrimitive("showCrossbowBucketTooltip").getAsBoolean());
+                }
 
+                if(jsonObject.getAsJsonPrimitive("showBeehiveTooltip") != null){
+                    showBeehiveTooltip.setValue(jsonObject.getAsJsonPrimitive("showBeehiveTooltip").getAsBoolean());
+                }
 
+                if(jsonObject.getAsJsonPrimitive("clockGUI_timeformat") != null){
+                    timeFormat.setValue(TimeFormat.byId(jsonObject.getAsJsonPrimitive("clockGUI_timeformat").getAsInt()));
+                }
+
+                if(jsonObject.getAsJsonPrimitive("compassPreciseCoordinate") != null){
+                    preciseCoordinate.setValue(jsonObject.getAsJsonPrimitive("compassPreciseCoordinate").getAsBoolean());
+                }
+
+                if(jsonObject.getAsJsonPrimitive("sneakToRenameNameTag") != null){
+                    SNEAKING_TO_RENAME_NAME_TAG.setValue(jsonObject.getAsJsonPrimitive("sneakToRenameNameTag").getAsBoolean());
+                }
+
+                if(jsonObject.getAsJsonPrimitive("toolItemDisplay") != null){
+                    TOOL_ITEM_DISPLAY.setValue(ItemGUIDisplay.byId(jsonObject.getAsJsonPrimitive("toolItemDisplay").getAsInt()));
+                }
             }
         }catch ( FileNotFoundException var){
             LogUtils.getLogger().error("Couldn't load WISB configuration file. XD");
