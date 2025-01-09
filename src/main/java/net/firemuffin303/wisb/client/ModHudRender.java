@@ -18,6 +18,9 @@ import net.minecraft.item.map.MapIcon;
 import net.minecraft.item.map.MapState;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -25,6 +28,7 @@ import net.minecraft.util.Pair;
 import net.minecraft.util.math.GlobalPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 
 import java.util.*;
 
@@ -91,6 +95,8 @@ public class ModHudRender {
         }
 
         GlobalPos target = CompassItem.hasLodestone(compass) ? CompassItem.createLodestonePos(compass.getOrCreateNbt()) : CompassItem.createSpawnPos(world);
+        Optional<RegistryKey<World>> compassWorld = CompassItem.hasLodestone(compass) ? World.CODEC.parse(NbtOps.INSTANCE,compass.getOrCreateNbt().get("LodestoneDimension")).result() : Optional.empty();
+
         double bodyYaw = getBodyYaw(clientPlayerEntity);
 
         drawContext.setShaderColor(1.0f,1.0f,1.0f,0.95f);
@@ -111,7 +117,7 @@ public class ModHudRender {
         drawContext.setShaderColor(1.0f,1.0f,1.0f,1.0f);
 
         //Target Pointer
-        if(target != null){
+        if(target != null && compassWorld.isPresent() &&  clientPlayerEntity.clientWorld.getRegistryKey() == compassWorld.get()){
             Vec3d vec3d = Vec3d.ofCenter(target.getPos());
             double angleMarker = ModHudRender.calculateMarker(clientPlayerEntity,drawContext.getScaledWindowWidth(),bodyYaw,vec3d);
 

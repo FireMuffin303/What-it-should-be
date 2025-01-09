@@ -52,6 +52,9 @@ public class ModLangProvider extends FabricLanguageProvider {
         translationBuilder.add("gamerule.wisb:showCompassGUI","Show Compass GUI");
         translationBuilder.add("gamerule.wisb:showTreasureInCompassGUI","Show Treasure in Compass GUI");
         translationBuilder.add("gamerule.wisb:showClockGUI","Show Clock GUI");
+        translationBuilder.add("gamerule.wisb:turtleBarnacleMaxTime","Turtle Barnacle spawns max time (ticks)");
+        translationBuilder.add("gamerule.wisb:turtleBarnacleMinTime","Turtle Barnacle spawns min time (ticks)");
+        translationBuilder.add("gamerule.wisb:turtleHasBarnacle","Turtle has barnacle");
 
         //ModMenu
         translationBuilder.add("modmenu.descriptionTranslation.wisb","A Minecraft mod which focus on revamping or reworking Vanilla mechanics to what it should be. At least from FireMuffin303's thought... Most of features are configurable by Mod config for client side and Game Rules for server side. Feel free to config to what you like! ");
@@ -120,6 +123,9 @@ public class ModLangProvider extends FabricLanguageProvider {
             translationBuilder.add("gamerule.wisb:showCompassGUI","แสดงหน้าต่างเข็มทิศ");
             translationBuilder.add("gamerule.wisb:showTreasureInCompassGUI","แสดงสมบัติบนหน้าเข็มทิศ");
             translationBuilder.add("gamerule.wisb:showClockGUI","แสดงหน้าต่างนาฬิกา");
+            translationBuilder.add("gamerule.wisb:turtleBarnacleMaxTime","เวลาสูงสุดที่เต่าติดเพรียงทะเล (ticks)");
+            translationBuilder.add("gamerule.wisb:turtleBarnacleMinTime","เวลาต่ำสุดที่เต่าติดเพรียงทะเล (ticks)");
+            translationBuilder.add("gamerule.wisb:turtleHasBarnacle","เต่าติดเพรียงทะเล");
 
             //Rename Name Tag
             translationBuilder.add("wisb.renameNameTag.title","เปลี่ยนชื่อของป้ายชื่อ");
@@ -131,7 +137,7 @@ public class ModLangProvider extends FabricLanguageProvider {
 
             //JEI
             translationBuilder.add("wisb.jei.mobbrush.title","Wisb's ปัดแปรงสัตว์");
-            translationBuilder.add("wisb.jei.mobbrush.turtle","Turtles swim for a while, then get barnacle on their back. Use brush to clean them off.");
+            translationBuilder.add("wisb.jei.mobbrush.turtle","เมื่อเต่าว่ายน้ำได้ระยะเวลานึง พวกมันจะติดเพรียงทะเลที่หลัง สามารถใช้แปรงขัดออกได้.");
 
             //Jade
             translationBuilder.add("jade.wisb.turtle.barnacle.tooltip","เพรียงทะเล : %s");

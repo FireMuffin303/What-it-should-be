@@ -1,7 +1,9 @@
-// 1.20.1	2024-11-30T20:30:03.0363724	What it should be/Recipes
+// 1.20.1	2025-01-09T09:41:30.5099579	What it should be/Recipes
 a6323008763df3191e1141f8ca94d964a8d63cac data\wisb\recipes\leather_from_furnace.json
+9d228b5699b651749a88bc0ab6c3de4c06b3456b data\wisb\advancements\recipes\decorations\lodestone.json
 a34f31de5d9ea6ffae8089bfc03e9cf81dbc9573 data\wisb\recipes\leather_from_smoking.json
 a3fb33b32aa93adc714f3b1676d7abd84313fa56 data\wisb\advancements\recipes\misc\leather_from_campfire.json
 511e20b5ea884725fb8317002b8c95801b05dc89 data\wisb\advancements\recipes\misc\leather_from_furnace.json
-6948bccc6d43920d1152249c513e95300ea01e60 data\wisb\recipes\leather_from_campfire.json
+cfa4193e64cbd2735fe5583c7990f9d64be5c91d data\wisb\recipes\lodestone.json
 b359d816bd310d87947c1e45a56b08a0c70ff2a4 data\wisb\advancements\recipes\misc\leather_from_smoking.json
+6948bccc6d43920d1152249c513e95300ea01e60 data\wisb\recipes\leather_from_campfire.json
