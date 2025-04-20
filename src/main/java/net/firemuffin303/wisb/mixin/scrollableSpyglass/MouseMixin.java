@@ -1,8 +1,10 @@
 package net.firemuffin303.wisb.mixin.scrollableSpyglass;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.logging.LogUtils;
 import net.firemuffin303.wisb.client.WisbClient;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
@@ -16,6 +18,16 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(Mouse.class)
 public abstract class MouseMixin {
     @Shadow @Final private MinecraftClient client;
+
+    @ModifyExpressionValue(method = "updateMouse", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Mouse;cursorDeltaX:D",ordinal = 2))
+    public double wisb$modifyXValue(double original){
+        return original * (8.0 * WisbClient.spyGlassZoomScale);
+    }
+
+    @ModifyExpressionValue(method = "updateMouse", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Mouse;cursorDeltaY:D",ordinal = 2))
+    public double wisb$modifyYValue(double original){
+        return original * (8.0 * WisbClient.spyGlassZoomScale);
+    }
 
     @WrapOperation(method = "onMouseScroll",at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;scrollInHotbar(D)V"))
     public void wisb$adjustingSpyglassZoom(PlayerInventory instance, double scrollAmount, Operation<Void> original, @Local int i){

@@ -64,8 +64,6 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
     modImplementation "dev.emi:trinkets:${project.trinkets_version}"
-
-
     modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
     modImplementation "maven.modrinth:jade:${project.jade_version}"
 
