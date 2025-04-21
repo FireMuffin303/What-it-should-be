@@ -24,6 +24,8 @@
     "BossBarHudAccessor",
     "ClientWorldComponentMixin",
     "InGameHudMixin",
+    "scrollableSpyglass.AbstractClientPlayerEntityMixin",
+    "scrollableSpyglass.MouseMixin",
     "turtle.TurtleEntityRendererMixin"
   ],
   "injectors": {

@@ -34,8 +34,9 @@ public class ModLangProvider extends FabricLanguageProvider {
         translationBuilder.add("wisb.options.sneakingToRenameNameTag","Sneak To Rename Name Tag");
         translationBuilder.add("wisb.options.toolItemDisplay","Tool Item Display");
         translationBuilder.add("wisb.options.toolItemDisplay.desc","Change how items special GUI show such as Compass, Clocks and Recovery Compass");
-        translationBuilder.add("wisb.option.itemGuiDisplay.up","Up");
-        translationBuilder.add("wisb.option.itemGuiDisplay.down","Down");
+        translationBuilder.add("wisb.options.itemGuiDisplay.up","Up");
+        translationBuilder.add("wisb.options.itemGuiDisplay.down","Down");
+        translationBuilder.add("wisb.options.zoomableSpyglass","Zoomable Spyglass");
 
         //Rename Name Tag
         translationBuilder.add("wisb.renameNameTag.title","Rename Name Tag");
@@ -108,8 +109,9 @@ public class ModLangProvider extends FabricLanguageProvider {
             translationBuilder.add("wisb.options.sneakingToRenameNameTag","ย่องเพื่อเปลี่ยนชื่อของป้ายชื่อ");
             translationBuilder.add("wisb.options.toolItemDisplay","การแสดงหน้าต่างไอเทม");
             translationBuilder.add("wisb.options.toolItemDisplay.desc","เปลี่ยนหน้าต่างไอเทมพิเศษอย่างเข็มทิศ นาฬิกาและเข็มทิศหวนคืน");
-            translationBuilder.add("wisb.option.itemGuiDisplay.up","บน");
-            translationBuilder.add("wisb.option.itemGuiDisplay.down","ล่าง");
+            translationBuilder.add("wisb.options.itemGuiDisplay.up","บน");
+            translationBuilder.add("wisb.options.itemGuiDisplay.down","ล่าง");
+            translationBuilder.add("wisb.options.zoomableSpyglass","ปรับระด้บกล้องส่องทางไกล");
 
             // Game Rule
             translationBuilder.add("gamerule.wisb:sugarCaneGrowHeight","ระดับความสูงของต้นอ้อย");
