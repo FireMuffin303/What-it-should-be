@@ -29,8 +29,8 @@
   "wisb.config.title": "What It Should Be Config",
   "wisb.jei.mobbrush.title": "Wisb's Mob Brushing",
   "wisb.jei.mobbrush.turtle": "Turtles swim for a while, then get barnacle on their back. Use brush to clean them off.",
-  "wisb.option.itemGuiDisplay.down": "Down",
-  "wisb.option.itemGuiDisplay.up": "Up",
+  "wisb.options.itemGuiDisplay.down": "Down",
+  "wisb.options.itemGuiDisplay.up": "Up",
   "wisb.options.preciseCoordinate": "Compass Precise Coordinate",
   "wisb.options.preciseCoordinate.desc": "Show decimal number of current coordinate",
   "wisb.options.showBeehiveTooltip": "Show Beehive Tooltip",
@@ -46,5 +46,6 @@
   "wisb.options.timeformat.desc": "Choose between 24-Hour or 12-Hour (AM/PM) format",
   "wisb.options.toolItemDisplay": "Tool Item Display",
   "wisb.options.toolItemDisplay.desc": "Change how items special GUI show such as Compass, Clocks and Recovery Compass",
+  "wisb.options.zoomableSpyglass": "Zoomable Spyglass",
   "wisb.renameNameTag.title": "Rename Name Tag"
 }

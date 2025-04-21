@@ -29,8 +29,8 @@
   "wisb.config.title": "การตั้งค่า What It Should Be",
   "wisb.jei.mobbrush.title": "Wisb's ปัดแปรงสัตว์",
   "wisb.jei.mobbrush.turtle": "Turtles swim for a while, then get barnacle on their back. Use brush to clean them off.",
-  "wisb.option.itemGuiDisplay.down": "ล่าง",
-  "wisb.option.itemGuiDisplay.up": "บน",
+  "wisb.options.itemGuiDisplay.down": "ล่าง",
+  "wisb.options.itemGuiDisplay.up": "บน",
   "wisb.options.preciseCoordinate": "เข็มทิศแสดงตำแหน่งอย่างแม่นยำ",
   "wisb.options.preciseCoordinate.desc": "แสดงเลขทศนิยมของพิกัดในตำแหน่งปัจจุบัน",
   "wisb.options.showBeehiveTooltip": "แสดงรายละเอียดรังผึ้ง",
@@ -46,5 +46,6 @@
   "wisb.options.timeformat.desc": "เลือกรูปแบบการแสดงเวลา 24 ชั่วโมงหรือ 12 ชั่วโมง (AM/PM)",
   "wisb.options.toolItemDisplay": "การแสดงหน้าต่างไอเทม",
   "wisb.options.toolItemDisplay.desc": "เปลี่ยนหน้าต่างไอเทมพิเศษอย่างเข็มทิศ นาฬิกาและเข็มทิศหวนคืน",
+  "wisb.options.zoomableSpyglass": "ปรับระด้บกล้องส่องทางไกล",
   "wisb.renameNameTag.title": "เปลี่ยนชื่อของป้ายชื่อ"
 }

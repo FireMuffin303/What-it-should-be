@@ -29,7 +29,8 @@ public class ModConfigScreen extends Screen {
                 ModConfig.showBeehiveTooltip,
                 ModConfig.timeFormat,
                 ModConfig.preciseCoordinate,
-                ModConfig.SNEAKING_TO_RENAME_NAME_TAG
+                ModConfig.SNEAKING_TO_RENAME_NAME_TAG,
+                ModConfig.ZOOMABLE_SPYGLASS
         });
         this.addSelectableChild(this.list);
         this.addDrawableChild(ButtonWidget.builder(ScreenTexts.DONE,button -> {

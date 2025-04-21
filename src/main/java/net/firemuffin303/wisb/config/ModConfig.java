@@ -9,6 +9,7 @@ import net.firemuffin303.wisb.Wisb;
 import net.firemuffin303.wisb.client.WisbClient;
 import net.minecraft.client.option.SimpleOption;
 import net.minecraft.text.Text;
+import net.minecraft.util.JsonHelper;
 import net.minecraft.util.TranslatableOption;
 import net.minecraft.util.math.MathHelper;
 
@@ -48,6 +49,8 @@ public class ModConfig{
     public static final SimpleOption<Boolean> SNEAKING_TO_RENAME_NAME_TAG = SimpleOption.ofBoolean("wisb.options.sneakingToRenameNameTag",
             SimpleOption.emptyTooltip(),true);
 
+    public static final SimpleOption<Boolean> ZOOMABLE_SPYGLASS = SimpleOption.ofBoolean("wisb.options.zoomableSpyglass",SimpleOption.emptyTooltip(),true);
+
     public static boolean getShowMobBucket(){
         return showWisbMobBucketTooltip.getValue();
     }
@@ -62,6 +65,10 @@ public class ModConfig{
 
     public static boolean getSneakingToRenameNameTag(){
         return SNEAKING_TO_RENAME_NAME_TAG.getValue();
+    }
+
+    public static boolean getZoomableSpyglass(){
+        return ZOOMABLE_SPYGLASS.getValue();
     }
 
     public static <T extends Serializable> void load(){
@@ -79,13 +86,14 @@ public class ModConfig{
                 JsonObject jsonObject = JsonParser.parseReader(br).getAsJsonObject();
 
 
-                showWisbMobBucketTooltip.setValue(jsonObject.getAsJsonPrimitive("showMobBucketTooltip").getAsBoolean());
-                showWisbCrossbowBucketTooltip.setValue(jsonObject.getAsJsonPrimitive("showCrossbowBucketTooltip").getAsBoolean());
-                showBeehiveTooltip.setValue(jsonObject.getAsJsonPrimitive("showBeehiveTooltip").getAsBoolean());
-                timeFormat.setValue(TimeFormat.byId(jsonObject.getAsJsonPrimitive("clockGUI_timeformat").getAsInt()));
-                preciseCoordinate.setValue(jsonObject.getAsJsonPrimitive("compassPreciseCoordinate").getAsBoolean());
-                SNEAKING_TO_RENAME_NAME_TAG.setValue(jsonObject.getAsJsonPrimitive("sneakToRenameNameTag").getAsBoolean());
-                TOOL_ITEM_DISPLAY.setValue(ItemGUIDisplay.byId(jsonObject.getAsJsonPrimitive("toolItemDisplay").getAsInt()));
+                showWisbMobBucketTooltip.setValue(JsonHelper.getBoolean(jsonObject,"showMobBucketTooltip",true));
+                showWisbCrossbowBucketTooltip.setValue(JsonHelper.getBoolean(jsonObject,"showCrossbowBucketTooltip",true));
+                showBeehiveTooltip.setValue(JsonHelper.getBoolean(jsonObject,"showBeehiveTooltip",true));
+                timeFormat.setValue(TimeFormat.byId(JsonHelper.getInt(jsonObject,"clockGUI_timeformat",0)));
+                preciseCoordinate.setValue(JsonHelper.getBoolean(jsonObject,"compassPreciseCoordinate",false));
+                SNEAKING_TO_RENAME_NAME_TAG.setValue(JsonHelper.getBoolean(jsonObject,"sneakToRenameNameTag",true));
+                TOOL_ITEM_DISPLAY.setValue(ItemGUIDisplay.byId(JsonHelper.getInt(jsonObject,"toolItemDisplay",0)));
+                ZOOMABLE_SPYGLASS.setValue(JsonHelper.getBoolean(jsonObject,"zoomableSpyglass",true));
 
 
             }
@@ -112,6 +120,7 @@ public class ModConfig{
         jsonObject.addProperty("compassPreciseCoordinate",preciseCoordinate.getValue());
         jsonObject.addProperty("sneakToRenameNameTag",SNEAKING_TO_RENAME_NAME_TAG.getValue());
         jsonObject.addProperty("toolItemDisplay",TOOL_ITEM_DISPLAY.getValue().getId());
+        jsonObject.addProperty("zoomableSpyglass",ZOOMABLE_SPYGLASS.getValue());
 
 
         String jsonString =  WisbClient.GSON.toJson(jsonObject);
@@ -164,8 +173,8 @@ public class ModConfig{
     }
 
     public enum ItemGUIDisplay implements TranslatableOption{
-        UP(0,"wisb.option.itemGuiDisplay.up"),
-        DOWN(1,"wisb.option.itemGuiDisplay.down");
+        UP(0,"wisb.options.itemGuiDisplay.up"),
+        DOWN(1,"wisb.options.itemGuiDisplay.down");
 
         int id;
         String translationKey;

@@ -4,8 +4,9 @@ import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import com.mojang.logging.LogUtils;
+import com.terraformersmc.modmenu.util.mod.Mod;
 import net.firemuffin303.wisb.client.WisbClient;
+import net.firemuffin303.wisb.config.ModConfig;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.Mouse;
 import net.minecraft.entity.player.PlayerInventory;
@@ -21,17 +22,17 @@ public abstract class MouseMixin {
 
     @ModifyExpressionValue(method = "updateMouse", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Mouse;cursorDeltaX:D",ordinal = 2))
     public double wisb$modifyXValue(double original){
-        return original * (8.0 * WisbClient.spyGlassZoomScale);
+        return ModConfig.ZOOMABLE_SPYGLASS.getValue() ? original * (8.0 * WisbClient.spyGlassZoomScale) : original;
     }
 
     @ModifyExpressionValue(method = "updateMouse", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Mouse;cursorDeltaY:D",ordinal = 2))
     public double wisb$modifyYValue(double original){
-        return original * (8.0 * WisbClient.spyGlassZoomScale);
+        return ModConfig.ZOOMABLE_SPYGLASS.getValue() ? original * (8.0 * WisbClient.spyGlassZoomScale) : original;
     }
 
     @WrapOperation(method = "onMouseScroll",at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerInventory;scrollInHotbar(D)V"))
     public void wisb$adjustingSpyglassZoom(PlayerInventory instance, double scrollAmount, Operation<Void> original, @Local int i){
-        if(this.client.player.isUsingSpyglass()){
+        if(this.client.player.isUsingSpyglass() && ModConfig.ZOOMABLE_SPYGLASS.getValue()){
             float zoomScale = this.client.options.sprintKey.isPressed() ? 0.1f : 0.05f;
             WisbClient.spyGlassZoomScale =  MathHelper.clamp(WisbClient.spyGlassZoomScale + (-i * zoomScale),0.1f,0.8f);
         }else{
