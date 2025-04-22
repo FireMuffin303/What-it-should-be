@@ -1,4 +1,5 @@
 {
+  "category.wisb.main": "What It Should Be",
   "config.jade.plugin_wisb.hud_render_side": "Item Tool Display Side",
   "config.jade.plugin_wisb.hud_render_side_left": "Left",
   "config.jade.plugin_wisb.hud_render_side_right": "Right",
@@ -20,6 +21,8 @@
   "gamerule.wisb:turtleBarnacleMinTime": "Turtle Barnacle spawns min time (ticks)",
   "gamerule.wisb:turtleHasBarnacle": "Turtle has barnacle",
   "jade.wisb.turtle.barnacle.tooltip": "Next Barnacle : %s",
+  "key.wisb.spyglassZoomScroll.down": "Decrease Spyglass Zoom",
+  "key.wisb.spyglassZoomScroll.up": "Increase Spyglass Zoom",
   "modmenu.descriptionTranslation.wisb": "A Minecraft mod which focus on revamping or reworking Vanilla mechanics to what it should be. At least from FireMuffin303's thought... Most of features are configurable by Mod config for client side and Game Rules for server side. Feel free to config to what you like! ",
   "modmenu.nameTranslation.wisb": "What It Should Be",
   "modmenu.summaryTranslation.wisb": "Revamping Minecraft to what it should be.",

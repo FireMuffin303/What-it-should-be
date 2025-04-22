@@ -57,6 +57,11 @@ public class ModLangProvider extends FabricLanguageProvider {
         translationBuilder.add("gamerule.wisb:turtleBarnacleMinTime","Turtle Barnacle spawns min time (ticks)");
         translationBuilder.add("gamerule.wisb:turtleHasBarnacle","Turtle has barnacle");
 
+        //Buttons
+        translationBuilder.add("category.wisb.main","What It Should Be");
+        translationBuilder.add("key.wisb.spyglassZoomScroll.down","Decrease Spyglass Zoom");
+        translationBuilder.add("key.wisb.spyglassZoomScroll.up","Increase Spyglass Zoom");
+
         //ModMenu
         translationBuilder.add("modmenu.descriptionTranslation.wisb","A Minecraft mod which focus on revamping or reworking Vanilla mechanics to what it should be. At least from FireMuffin303's thought... Most of features are configurable by Mod config for client side and Game Rules for server side. Feel free to config to what you like! ");
         translationBuilder.add("modmenu.nameTranslation.wisb","What It Should Be");
@@ -128,6 +133,11 @@ public class ModLangProvider extends FabricLanguageProvider {
             translationBuilder.add("gamerule.wisb:turtleBarnacleMaxTime","เวลาสูงสุดที่เต่าติดเพรียงทะเล (ticks)");
             translationBuilder.add("gamerule.wisb:turtleBarnacleMinTime","เวลาต่ำสุดที่เต่าติดเพรียงทะเล (ticks)");
             translationBuilder.add("gamerule.wisb:turtleHasBarnacle","เต่าติดเพรียงทะเล");
+
+            //Buttons
+            translationBuilder.add("category.wisb.main","What It Should Be");
+            translationBuilder.add("key.wisb.spyglassZoomScroll.up","ซูมกล้องส่องทางไกลมากขึ้น");
+            translationBuilder.add("key.wisb.spyglassZoomScroll.down","ซูมกล้องส่องทางไกลน้อยลง");
 
             //Rename Name Tag
             translationBuilder.add("wisb.renameNameTag.title","เปลี่ยนชื่อของป้ายชื่อ");

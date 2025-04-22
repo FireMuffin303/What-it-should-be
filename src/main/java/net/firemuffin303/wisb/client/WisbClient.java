@@ -90,7 +90,7 @@ public class WisbClient implements ClientModInitializer {
                 "key.wisb.spyglassZoomScroll.up",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_UP,
-                "category.wisb.spyglass"
+                "category.wisb.main"
                 )
         );
 
@@ -98,7 +98,7 @@ public class WisbClient implements ClientModInitializer {
                         "key.wisb.spyglassZoomScroll.down",
                         InputUtil.Type.KEYSYM,
                         GLFW.GLFW_KEY_DOWN,
-                        "category.wisb.spyglass"
+                        "category.wisb.main"
                 )
         );
 
